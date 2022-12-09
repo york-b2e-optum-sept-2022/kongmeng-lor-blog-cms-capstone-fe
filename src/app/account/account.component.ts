@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AccountComponent {
   constructor() {}
 
-  signUp: boolean = true;
+  signUp: boolean = false;
   onSignUp() {
     this.signUp = true;
   }
@@ -17,15 +17,29 @@ export class AccountComponent {
   password: string = "";
 
   onCreate() {
+    console.log(this.name)
+    console.log(this.email)
+    console.log(this.password)
 
+    this.clearVariables();
+    this.signUp = false;
   }
   onLogin() {
-
+    console.log(this.email)
+    console.log(this.password)
   }
   onCancel() {
 
+
+    this.clearVariables();
+    this.signUp = false;
   }
 
+  clearVariables() {
+    this.name = "";
+    this.email = "";
+    this.password = "";
+  }
 
 
 }
