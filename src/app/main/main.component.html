@@ -1,1 +1,26 @@
-<p>main works!</p>
+<div>
+
+  <mat-toolbar color="primary" class="d-flex justify-content-between">
+    <div>
+      <h1 class="m-5">Welcome {{current_Account.name}}</h1>
+    </div>
+    <div>
+      <button mat-raised-button class="m-2">Home</button>
+      <button mat-raised-button class="m-2">View Blogs</button>
+      <button mat-raised-button class="m-2">Message</button>
+      <button mat-raised-button class="m-2">Log Out</button>
+    </div>
+  </mat-toolbar>
+
+</div>
+
+
+<div *ngFor="let elemnt of current_Account.messageEntities">
+  {{elemnt.current_Message}}
+    <div *ngFor="let test of elemnt.history_Messages">
+
+    </div>
+</div>
+
+
+{{temp}}

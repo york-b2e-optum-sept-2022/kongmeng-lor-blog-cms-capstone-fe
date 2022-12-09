@@ -24,6 +24,11 @@
           <input type="password" matInput placeholder="password" [(ngModel)]="password" name="password">
         </mat-form-field>
       </form>
+      <div class="justify-content-center m-2">
+        <h3>
+          {{error}}
+        </h3>
+      </div>
     </mat-card-content>
     <mat-card-footer>
       <div class="d-flex justify-content-center mt-4">
@@ -37,7 +42,7 @@
   </mat-card>
 </div>
 
-<div *ngIf="signUp" class="mt-5 d-flex justify-content-center">
+<div *ngIf="signUp" class="mt-5 d-flex justify-content-center flex-wrap">
   <mat-card style="width: 40rem">
     <mat-card-header class="justify-content-center mb-4">
       <h1 >Create Account</h1>
@@ -63,6 +68,13 @@
         <h3>Password</h3>
         <mat-form-field class="example-form d-flex justify-content-center">
           <input type="password" matInput placeholder="password" [(ngModel)]="password" name="password">
+        </mat-form-field>
+      </form>
+
+      <form class="m-2">
+        <h3>Confirm Password</h3>
+        <mat-form-field class="example-form d-flex justify-content-center">
+          <input type="password" matInput placeholder="confirm password" [(ngModel)]="confirm_Password" name="password">
         </mat-form-field>
       </form>
 
