@@ -3,6 +3,8 @@ import {AccountService} from "../services/account.service";
 import {Subscription} from "rxjs";
 import {ICreateAccount} from "../interfaces/ICreateAccount";
 import {IAccount} from "../interfaces/IAccount";
+import {IHistoryMessage} from "../interfaces/IHistoryMessage";
+import {IDisplayMessage} from "../interfaces/IDisplayMessage";
 
 @Component({
   selector: 'app-main',
@@ -33,17 +35,33 @@ export class MainComponent implements OnDestroy{
     messageEntities: [],
     blogEntities: []
   }
-  temp: any = "";
+
+  display_Message: IDisplayMessage[] = [];
 
   onFunction() {
-    let test = this.current_Account.messageEntities[0].history_Messages;
-
-    for(let key in test ) {
-      console.log(Object.keys(test));
-      console.log(Object.values(test));
+    if (this.current_Account.messageEntities.length == 0 && this.current_Account.blogEntities.length == 0) {
+      return;
     }
-
-
+    let messages: IHistoryMessage[] = [];
+    let test2 = this.current_Account.messageEntities[0].history_Messages;
+    let test = this.current_Account.messageEntities[0].history_Messages.length;
+    for(let key = 0; key < test; key++ ) {
+      let test: IHistoryMessage = {
+        index: key,
+        sender: Object.keys(test2[key]),
+        message: Object.values(test2[key])
+      }
+      messages.push(test);
+    }
+    for (let i = 0; i < messages.length; i++) {
+      const temp: IDisplayMessage = {
+        index: i,
+        sender: messages[i].sender[0],
+        message: messages[i].message[0]
+      }
+      this.display_Message.push(temp);
+    }
+    console.log(this.display_Message);
   }
 
   ngOnDestroy() {

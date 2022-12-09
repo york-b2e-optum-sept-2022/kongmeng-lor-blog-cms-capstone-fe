@@ -1,26 +1,35 @@
 <div>
-
   <mat-toolbar color="primary" class="d-flex justify-content-between">
     <div>
-      <h1 class="m-5">Welcome {{current_Account.name}}</h1>
+      <h1 class="m-2">Welcome {{current_Account.name}}</h1>
     </div>
     <div>
       <button mat-raised-button class="m-2">Home</button>
-      <button mat-raised-button class="m-2">View Blogs</button>
+      <button mat-raised-button class="m-2">Account</button>
       <button mat-raised-button class="m-2">Message</button>
       <button mat-raised-button class="m-2">Log Out</button>
     </div>
   </mat-toolbar>
-
 </div>
+<div>
+    <mat-card class="m-2" >
+      <mat-card-header class="d-flex justify-content-center">
+        <h1 >Blogs</h1>
+      </mat-card-header>
+      <mat-card-content>
+        <form>
+          <mat-form-field class="d-flex justify-content-center">
+            <input type="text" matInput placeholder="search for blogs">
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <mat-list>
 
-
-<div *ngFor="let elemnt of current_Account.messageEntities">
-  {{elemnt.current_Message}}
-    <div *ngFor="let test of elemnt.history_Messages">
-
-    </div>
+      <mat-list-item>A</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>A</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>A</mat-list-item>
+    </mat-list>
 </div>
-
-
-{{temp}}
