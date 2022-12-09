@@ -1,8 +1,9 @@
+
 <mat-toolbar class="d-flex justify-content-center" color="primary">
   <h1 class="m-5">Welcome to Blogs</h1>
 </mat-toolbar>
 
-<div class="d-flex justify-content-center mt-5" >
+<div class="d-flex justify-content-center mt-5" *ngIf="!signUp">
   <mat-card style="width: 40rem">
     <mat-card-header class="justify-content-center mb-4">
       <h1 >Log In</h1>
@@ -28,8 +29,52 @@
       </div>
       <div class="d-flex justify-content-center m-4">
         <p class="m-3">Not a member? </p>
-        <button mat-raised-button class="m-2">Signup</button>
+        <button mat-raised-button class="m-2" (click)="onSignUp()">Signup</button>
       </div>
     </mat-card-footer>
   </mat-card>
 </div>
+
+<div *ngIf="signUp" class="mt-5 d-flex justify-content-center">
+  <mat-card style="width: 40rem">
+    <mat-card-header class="justify-content-center mb-4">
+      <h1 >Create Account</h1>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <form class="m-2">
+        <h3>Name</h3>
+        <mat-form-field class="example-form d-flex justify-content-center">
+          <input type="text" matInput placeholder="name">
+        </mat-form-field>
+      </form>
+
+      <form class="m-2">
+        <h3>Email</h3>
+        <mat-form-field class="example-form d-flex justify-content-center">
+          <input type="email" matInput placeholder="email">
+        </mat-form-field>
+      </form>
+
+      <form class="m-2">
+        <h3>Password</h3>
+        <mat-form-field class="example-form d-flex justify-content-center">
+          <input type="password" matInput placeholder="password">
+        </mat-form-field>
+      </form>
+
+    </mat-card-content>
+
+
+    <mat-card-footer class="d-flex justify-content-center mt-4">
+
+      <div class="d-flex justify-content-between mb-5">
+        <button mat-raised-button color="primary" class="m-2">Create</button>
+        <button mat-raised-button color="warn" class="m-2">Cancel</button>
+      </div>
+
+    </mat-card-footer>
+  </mat-card>
+</div>
+
