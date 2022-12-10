@@ -6,30 +6,56 @@
     <div>
       <button mat-raised-button class="m-2">Home</button>
       <button mat-raised-button class="m-2">Account</button>
-      <button mat-raised-button class="m-2">Message</button>
-      <button mat-raised-button class="m-2">Log Out</button>
+      <button mat-raised-button class="m-2" (click)="onLogOut()">Log Out</button>
     </div>
   </mat-toolbar>
 </div>
-<div>
-    <mat-card class="m-2" >
-      <mat-card-header class="d-flex justify-content-center">
-        <h1 >Blogs</h1>
-      </mat-card-header>
-      <mat-card-content>
-        <form>
-          <mat-form-field class="d-flex justify-content-center">
-            <input type="text" matInput placeholder="search for blogs">
-          </mat-form-field>
-        </form>
-      </mat-card-content>
-    </mat-card>
-    <mat-list>
+<div class="d-flex justify-content-between flex-wrap">
+  <mat-card class="m-2" style="width: 39rem">
+    <mat-card-header>
+      <h1>Your Blogs</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <mat-form-field appearance="fill" class="m-1" style="width: 25rem;">
+          <mat-label>search blogs</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <button mat-raised-button class="m-1">Search</button>
+        <button mat-raised-button class="m-1">Create</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-      <mat-list-item>A</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item>A</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item>A</mat-list-item>
-    </mat-list>
+
+  <mat-card class="m-2" style="width: 39rem">
+    <mat-card-header>
+      <h1>Message</h1>
+    </mat-card-header>
+    <mat-card-content class="mt-2">
+      <div>
+        <button mat-raised-button class="m-1">View Message History</button>
+        <button mat-raised-button class="m-1">Send Message</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="m-2" style="width: 39rem">
+    <mat-card-header>
+      <h1>Other Blogs</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <mat-form-field appearance="fill" style="width: 37rem">
+          <mat-label>filter blog lists</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </div>
+
+      <div>
+
+      </div>
+
+    </mat-card-content>
+  </mat-card>
 </div>

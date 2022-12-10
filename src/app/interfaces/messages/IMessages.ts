@@ -1,9 +1,9 @@
-import {IHistoryMessage} from "./IHistoryMessage";
-
+import {IHIstoryMessages} from "./IHIstoryMessages";
 export interface IMessages {
   id: number,
   current_Message: string,
+  owner: string,
   email_From: string,
   email_To: string,
-  history_Messages:any[];
+  history_Messages:IHIstoryMessages[]
 }

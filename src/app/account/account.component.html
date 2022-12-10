@@ -24,7 +24,7 @@
           <input type="password" matInput placeholder="password" [(ngModel)]="password" name="password">
         </mat-form-field>
       </form>
-      <div class="justify-content-center m-2">
+      <div class="d-flex justify-content-center m-2">
         <h3>
           {{error}}
         </h3>
@@ -79,15 +79,16 @@
       </form>
 
     </mat-card-content>
-
-
+    <mat-card-content>
+      <div class="d-flex justify-content-center">
+        <h4>{{error}}</h4>
+      </div>
+    </mat-card-content>
     <mat-card-footer class="d-flex justify-content-center mt-4">
-
       <div class="d-flex justify-content-between mb-5">
         <button mat-raised-button color="primary" class="m-2" (click)="onCreate()">Create</button>
         <button mat-raised-button color="warn" class="m-2" (click)="onCancel()">Cancel</button>
       </div>
-
     </mat-card-footer>
   </mat-card>
 </div>

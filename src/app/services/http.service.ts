@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ICreateAccount} from "../interfaces/ICreateAccount";
+import {ICreateAccount} from "../interfaces/create/ICreateAccount";
 import {Observable} from "rxjs";
-import {ILogIn} from "../interfaces/ILogIn";
+import {ILogIn} from "../interfaces/create/ILogIn";
 import {IAccount} from "../interfaces/IAccount";
 
 @Injectable({

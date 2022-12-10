@@ -1,8 +1,8 @@
 import {Component, OnDestroy} from '@angular/core';
 import {AccountService} from "../services/account.service";
-import {ILogIn} from "../interfaces/ILogIn";
+import {ILogIn} from "../interfaces/create/ILogIn";
 import {Subscription} from "rxjs";
-import {ICreateAccount} from "../interfaces/ICreateAccount";
+import {ICreateAccount} from "../interfaces/create/ICreateAccount";
 
 @Component({
   selector: 'app-account',
@@ -16,21 +16,26 @@ export class AccountComponent implements OnDestroy{
     });
   }
   sub1: Subscription;
-  ngOnDestroy() {
-    this.sub1.unsubscribe();
-  }
+
 
   signUp: boolean = false;
   error: string = "";
-  onSignUp() {
-    this.signUp = true;
-  }
   name: string = "";
   email: string = "";
   password: string = "";
   confirm_Password: string = "";
 
+  onSignUp() {
+    this.signUp = true;
+    this.clearVariables();
+  }
   onCreate() {
+    if (this.email == "" || this.password == "" || this.name == "" || this.confirm_Password == "") {
+      this.accountService.$error.next("Please make sure you enter all the requirements. Try again.")
+      return;
+    }
+    this.accountService.$error.next("");
+
     const data: ICreateAccount = {
       email: this.email,
       password: this.password,
@@ -39,22 +44,21 @@ export class AccountComponent implements OnDestroy{
       id: -1
     }
     this.accountService.createAccount(data);
-
     this.clearVariables();
     this.signUp = false;
   }
+
   onLogin() {
     const data: ILogIn = {
       email: this.email,
       password: this.password
     }
     this.accountService.logIn(data);
-    console.log(this.email)
-    console.log(this.password)
+    this.accountService.$error.next("");
   }
+
+
   onCancel() {
-
-
     this.clearVariables();
     this.signUp = false;
   }
@@ -66,4 +70,7 @@ export class AccountComponent implements OnDestroy{
   }
 
 
+  ngOnDestroy() {
+    this.sub1.unsubscribe();
+  }
 }

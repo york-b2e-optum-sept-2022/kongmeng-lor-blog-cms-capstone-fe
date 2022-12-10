@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
-import {ICreateAccount} from "../interfaces/ICreateAccount";
-import {BehaviorSubject, first} from "rxjs";
-import {ILogIn} from "../interfaces/ILogIn";
+import {ICreateAccount} from "../interfaces/create/ICreateAccount";
+import {BehaviorSubject, first, Subscription} from "rxjs";
+import {ILogIn} from "../interfaces/create/ILogIn";
 import {IAccount} from "../interfaces/IAccount";
 
 @Injectable({
@@ -16,6 +16,9 @@ export class AccountService {
   $error = new BehaviorSubject<string>("");
   $logIn = new BehaviorSubject<boolean>(false);
 
+
+
+
   public createAccount(data: ICreateAccount) {
     this.httpService.createAccount(data).pipe(first()).subscribe({
       next: data => {console.log(data)}, error: err => {console.log(err)}
@@ -27,7 +30,6 @@ export class AccountService {
         this.$current_Account.next(data);
         console.log(this.$current_Account);
         this.$logIn.next(true);
-        // console.log(data);
       }, error: err => {
         if (err.status == 404) {
           this.$error.next("Can't find account. Please create an account.");
@@ -37,6 +39,9 @@ export class AccountService {
       }
     })
   }
+
+  sub1!: Subscription;
+
 
 
 
