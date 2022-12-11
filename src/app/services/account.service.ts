@@ -26,7 +26,7 @@ export class AccountService {
 
   message: IMessages = {
     id: -1,
-    history_Messages: [],
+    historyEntities: [],
     current_Message: "",
     owner: "",
     email_From: "",

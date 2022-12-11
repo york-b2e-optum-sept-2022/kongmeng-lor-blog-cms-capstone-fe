@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {AccountService} from "../services/account.service";
-import {Subscription} from "rxjs";
+import {filter, Subscription} from "rxjs";
 import {IAccount} from "../interfaces/IAccount";
 import {IMessageSend} from "../interfaces/messages/IMessageSend";
 
@@ -15,18 +15,26 @@ export class AllusersComponent implements OnDestroy{
     this.sub1 = this.accountService.$allAccounts.subscribe({
       next: value => {if (value!= null) {
         this.allAccounts = value;
+        this.onFilterAccounts();
       }}
     });
     this.sub2 = this.accountService.$currentId.subscribe({
       next: value => {
-        console.log(value);
         this.currentId = value}
     });
     this.sub3 = this.accountService.$error.subscribe({
       next: value => {this.error = value}
-    })
+    });
 
   }
+
+  onFilterAccounts() {
+    const temp = this.allAccounts.filter(index => index.id != this.currentId);
+    this.allAccounts = temp;
+  }
+
+
+  search: string = "";
 
 
   sub1: Subscription;
@@ -56,7 +64,12 @@ export class AllusersComponent implements OnDestroy{
   onCancel() {
     this.boolean_Send = false;
   }
+  boolean_Blogs: boolean = false;
 
+  onViewBlogs(i: number) {
+    this.otherUser = this.allAccounts[i];
+    this.boolean_Blogs = true;
+  }
 
 
 

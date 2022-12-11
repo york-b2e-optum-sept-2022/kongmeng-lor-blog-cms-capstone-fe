@@ -26,8 +26,10 @@ export class MainComponent implements OnDestroy{
     this.sub2 = this.accountService.$message.subscribe({
       next: value => {if (value != null) {
         this.messages = value;
+        console.log(this.messages);
       }}
     });
+
 
   }
 
@@ -59,11 +61,14 @@ export class MainComponent implements OnDestroy{
     id: -1,
     email_From: "",
     current_Message: "",
-    history_Messages: []
+    historyEntities: []
   }
   boolean_History: boolean = false;
   onHistory(i: number) {
     this.message = this.messages[i];
     this.boolean_History = true;
+  }
+  onReturn() {
+    this.boolean_History = false;
   }
 }
