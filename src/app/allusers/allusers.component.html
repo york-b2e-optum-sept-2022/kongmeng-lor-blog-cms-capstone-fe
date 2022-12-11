@@ -32,26 +32,33 @@
             <h3 class="m-1">Name: {{otherUser.name}}</h3>
             <h3 class="m-1">Email: {{otherUser.email}}</h3>
           </div>
-          <div class="m-4">
+          <div class="m-4" *ngIf="!boolean_ViewMore">
             <button mat-raised-button color="warn" (click)="onCancel()">Return</button>
           </div>
+          <div class="m-4"  *ngIf="boolean_ViewMore">
+            <button mat-raised-button color="warn" (click)="onBackMain()">Return</button>
+          </div>
       </mat-card-header>
+
       <mat-card-content>
+
         <div *ngIf="!boolean_ViewMore">
-        <div *ngFor="let element of otherUser.blogEntities; let i = index">
-          <mat-card class="m-2">
-            <div class="d-flex justify-content-between">
-              <div>
-                <h3 class="m-1">Blog Title: {{element.title}}</h3>
-                <h3 class="m-1">Created Date: {{element.create_Date}}</h3>
+          <div *ngFor="let element of otherUser.blogEntities; let i = index">
+            <mat-card class="m-2">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h3 class="m-1">Blog Title: {{element.title}}</h3>
+                  <h3 class="m-1">Created Date: {{element.create_Date}}</h3>
+                </div>
+                <div class="m-4">
+                  <button mat-raised-button color="primary" (click)="onViewMore(i)">View More</button>
+                </div>
               </div>
-              <div class="m-4">
-                <button mat-raised-button color="primary" (click)="onViewMore(i)">View More</button>
-              </div>
-            </div>
-          </mat-card>
+            </mat-card>
+          </div>
         </div>
-        </div>
+
+
         <div *ngIf="boolean_ViewMore">
           <mat-card class="m-2">
             <div>
@@ -65,6 +72,7 @@
                 <mat-card class="m-2">
                   <h3 class="m-2">{{blog.body}}</h3>
                 </mat-card>
+
                 <mat-card class="m-2">
                   <div class="d-flex justify-content-between">
                     <div class="m-2">
@@ -76,6 +84,10 @@
                   </div>
                 </mat-card>
 
+                <mat-card class="m-2">
+                  <h3 class="m-2">Total Views: {{blog.view_Counts}}</h3>
+                </mat-card>
+
               </mat-card-content>
               <mat-card-header>
                 <div>
@@ -83,16 +95,17 @@
                 </div>
               </mat-card-header>
               <mat-card-content>
-                <div class="d-flex justify-content-center">
+                <div class="m-3">
                   <p>{{error}}</p>
                 </div>
-                <div *ngIf="!boolean_Comment">
-                  <mat-form-field style="width: 22rem" >
-                    <input matInput [(ngModel)]="comment_String" name="comment">
-                  </mat-form-field>
-                  <button mat-raised-button color="primary" (click)="onAddComment()" class="m-2" >Add Comment</button>
-                </div>
-
+                <mat-card-content>
+                  <div *ngIf="!boolean_Comment">
+                    <mat-form-field style="width: 22rem" >
+                      <input matInput [(ngModel)]="comment_String" name="comment">
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" (click)="onAddComment()" class="m-2" >Add Comment</button>
+                  </div>
+                </mat-card-content>
 
                   <div *ngIf="!boolean_Comment" class="m-2">
                     <div *ngFor="let element of comments; let i = index">

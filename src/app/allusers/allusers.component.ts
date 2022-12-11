@@ -151,6 +151,7 @@ export class AllusersComponent implements OnDestroy{
       comments: this.comment_String
     }
     this.accountService.addComment(data);
+    this.comment_String = "";
   }
 
   ngOnDestroy() {
@@ -204,6 +205,10 @@ export class AllusersComponent implements OnDestroy{
   }
   onCancel2() {
     this.boolean_Comment = false
+  }
+  onBackMain() {
+    this.boolean_ViewMore = false;
+    this.boolean_Comment = false;
   }
 
 }
