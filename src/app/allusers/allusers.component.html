@@ -1,0 +1,51 @@
+<div *ngIf="!boolean_Send">
+  <mat-form-field appearance="fill" style="width: 37rem">
+    <mat-label>search users</mat-label>
+    <input matInput>
+  </mat-form-field>
+</div>
+
+<div *ngIf="!boolean_Send">
+  <div *ngFor="let element of allAccounts; let i = index" >
+    <mat-card class="m-2" >
+      <mat-card-header>
+        <div>
+          <h2>Name: {{element.name}}</h2>
+          <h2>Email: {{element.email}}</h2>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <button mat-raised-button color="primary" class="m-2" (click)="onSend(i)" *ngIf="!boolean_Send">Send a message</button>
+          <button mat-raised-button color="accent" class="m-2">View all the blogs</button>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div  *ngIf="boolean_Send">
+  <mat-card>
+    <mat-card-header>
+      <div>
+        <h2>Name: {{otherUser.name}}</h2>
+        <h2>Email: {{otherUser.email}}</h2>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="mb-3">
+        {{error}}
+      </div>
+      <div>
+        <mat-form-field style="width: 28rem" >
+          <input matInput [(ngModel)]="message" name="message">
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="m-1"(click)="onSendMessage()">Send Message</button>
+        <button mat-raised-button color="warn" class="m-1" (click)="onCancel()">Cancel</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

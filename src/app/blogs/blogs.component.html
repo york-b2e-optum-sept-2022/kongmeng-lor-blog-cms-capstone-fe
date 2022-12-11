@@ -1,0 +1,26 @@
+
+<div *ngFor="let element of allBlogs; let i = index" class="flex-wrap m-2">
+  <mat-card>
+    <mat-card-header>
+      <div>
+        <h2>Title: {{element.title}}</h2>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <h5>{{element.body}}</h5>
+      </div>
+    </mat-card-content>
+    <mat-card-content>
+      <button mat-raised-button>Comment</button>
+    </mat-card-content>
+    <mat-card-footer class="d-flex justify-content-end">
+      <div>
+        <h4 class="m-1">Owner: {{element.owner_Email}}</h4>
+        <h5 class="m-1">Create Date: {{element.create_Date}}</h5>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>
+
+

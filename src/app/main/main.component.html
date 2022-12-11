@@ -10,7 +10,11 @@
     </div>
   </mat-toolbar>
 </div>
+
+
+
 <div class="d-flex justify-content-between flex-wrap">
+
   <mat-card class="m-2" style="width: 39rem">
     <mat-card-header>
       <h1>Your Blogs</h1>
@@ -24,6 +28,9 @@
         <button mat-raised-button class="m-1">Search</button>
         <button mat-raised-button class="m-1">Create</button>
       </div>
+
+
+
     </mat-card-content>
   </mat-card>
 
@@ -37,25 +44,37 @@
         <button mat-raised-button class="m-1">View Message History</button>
         <button mat-raised-button class="m-1">Send Message</button>
       </div>
+      <div *ngFor="let element of messages; let i = index">
+        <mat-card class="m-2">
+          <mat-card class="m-3">
+            <mat-card-header>
+              <h2>Name: {{element.owner}}</h2>
+            </mat-card-header>
+          </mat-card>
+          <mat-card-content class="mb-2-1">
+            <mat-card>
+                  <h4 class="m-2">Who sent: {{element.email_From}}</h4>
+                  <h4 class="m-2">Receiving: {{element.email_To}}</h4>
+            </mat-card>
+            <mat-card class="mt-2 d-flex justify-content-between" >
+              <h4 class="m-2">Current Message:{{element.current_Message}} </h4>
+              <button mat-raised-button color="primary" (click)="onHistory(i)">View Message History</button>
+            </mat-card>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div>
+
+      </div>
     </mat-card-content>
   </mat-card>
 
   <mat-card class="m-2" style="width: 39rem">
     <mat-card-header>
-      <h1>Other Blogs</h1>
+      <h1>Users</h1>
     </mat-card-header>
     <mat-card-content>
-      <div>
-        <mat-form-field appearance="fill" style="width: 37rem">
-          <mat-label>filter blog lists</mat-label>
-          <input matInput>
-        </mat-form-field>
-      </div>
-
-      <div>
-
-      </div>
-
+      <app-allusers></app-allusers>
     </mat-card-content>
   </mat-card>
 </div>

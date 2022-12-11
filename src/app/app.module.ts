@@ -16,6 +16,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {FormsModule} from "@angular/forms";
 import {MatDividerModule} from '@angular/material/divider';
+import { BlogsComponent } from './blogs/blogs.component';
+import { AllusersComponent } from './allusers/allusers.component';
 
 
 
@@ -23,7 +25,9 @@ import {MatDividerModule} from '@angular/material/divider';
   declarations: [
     AppComponent,
     AccountComponent,
-    MainComponent
+    MainComponent,
+    BlogsComponent,
+    AllusersComponent
   ],
   imports: [
     MatToolbarModule,
