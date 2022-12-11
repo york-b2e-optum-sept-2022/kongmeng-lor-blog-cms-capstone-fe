@@ -22,12 +22,14 @@ export class MainComponent implements OnDestroy{
       }
     });
     this.accountService.getAllMessagesById(this.current_Account.id);
-
     this.sub2 = this.accountService.$message.subscribe({
       next: value => {if (value != null) {
         this.messages = value;
         console.log(this.messages);
       }}
+    });
+    this.sub3 = this.accountService.$boolean_Full_Blogs.subscribe({
+      next: value => {this.viewFullBlogs = value}
     });
 
 
@@ -35,7 +37,10 @@ export class MainComponent implements OnDestroy{
 
   sub1: Subscription;
   sub2: Subscription;
+  sub3: Subscription;
   messages: IMessages[] = [];
+
+  viewFullBlogs: boolean = false;
 
   current_Account: IAccount = {
     name: "",
@@ -54,6 +59,8 @@ export class MainComponent implements OnDestroy{
 
   ngOnDestroy() {
     this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
+    this.sub3.unsubscribe();
   }
   message: IMessages = {
     owner: "",

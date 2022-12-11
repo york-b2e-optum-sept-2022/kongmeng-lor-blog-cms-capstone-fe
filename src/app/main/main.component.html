@@ -100,8 +100,11 @@
   </mat-card>
 
   <mat-card class="m-2" style="width: 39rem">
-    <mat-card-header>
+    <mat-card-header *ngIf="!viewFullBlogs">
       <h1>Users</h1>
+    </mat-card-header>
+    <mat-card-header *ngIf="viewFullBlogs">
+      <h1>Viewing Other Blogs</h1>
     </mat-card-header>
     <mat-card-content>
       <app-allusers></app-allusers>

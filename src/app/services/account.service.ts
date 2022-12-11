@@ -7,6 +7,10 @@ import {IAccount} from "../interfaces/IAccount";
 import {IBlogs} from "../interfaces/blogs/IBlogs";
 import {IMessageSend} from "../interfaces/messages/IMessageSend";
 import {IMessages} from "../interfaces/messages/IMessages";
+import {IUpdateViews} from "../interfaces/blogs/IUpdateViews";
+import {IDeleteComment} from "../interfaces/blogs/IDeleteComment";
+import {IAddComment} from "../interfaces/blogs/IAddComment";
+import {IEditComment} from "../interfaces/blogs/IEditComment";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +26,8 @@ export class AccountService {
   $logIn = new BehaviorSubject<boolean>(false);
   $currentId = new BehaviorSubject<number>(-1);
   $message = new BehaviorSubject<IMessages[] | null>(null);
+  $boolean_Full_Blogs = new BehaviorSubject<boolean>(false);
+  $current_Blog = new BehaviorSubject<IBlogs | null>(null);
 
 
   message: IMessages = {
@@ -75,6 +81,27 @@ export class AccountService {
   public getAllMessagesById(id: number) {
     this.httpService.getMessagesById(id).subscribe({
       next: value => {this.$message.next(value)}, error: err => {console.log(err)}
+    })
+  }
+  public updateViews(data: IUpdateViews) {
+    this.httpService.updateViews(data).pipe(first()).subscribe({
+      next: value => {console.log(value)}, error: err => {console.log(err)}
+    });
+  }
+  public deleteComment(data: IDeleteComment) {
+    this.httpService.deleteComment(data).subscribe({
+      next: value => {
+        this.$current_Blog.next(value)}, error: err => {console.log(err)}
+    });
+  }
+  public addComment(data: IAddComment) {
+    this.httpService.addComment(data).subscribe({
+      next: value => {this.$current_Blog.next(value)}, error: err => {console.log(err)}
+    });
+  }
+  public editComment(data: IEditComment) {
+    this.httpService.editComment(data).pipe(first()).subscribe({
+      next: value => {this.$current_Blog.next(value)}, error: err => {console.log(err)}
     })
   }
 

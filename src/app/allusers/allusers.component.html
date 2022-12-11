@@ -1,11 +1,11 @@
-<div *ngIf="!boolean_Send">
+<div *ngIf="!boolean_Send && !boolean_Blogs">
   <mat-form-field appearance="fill" style="width: 37rem">
     <mat-label>search users</mat-label>
     <input matInput [(ngModel)]="search">
   </mat-form-field>
 </div>
 
-<div *ngIf="!boolean_Send">
+<div *ngIf="!boolean_Send && !boolean_Blogs">
   <div *ngFor="let element of allAccounts; let i = index" >
     <mat-card class="m-2" >
       <mat-card-header>
@@ -19,14 +19,125 @@
           <button mat-raised-button color="primary" class="m-2" (click)="onSend(i)" *ngIf="!boolean_Send">Send a message</button>
           <button mat-raised-button color="accent" class="m-2" (click)="onViewBlogs(i)">View all the blogs</button>
         </div>
-
       </mat-card-content>
     </mat-card>
   </div>
 </div>
 
-<div>
+<div *ngIf="boolean_Blogs">
+  <div>
+    <mat-card>
+      <mat-card-header>
+          <div>
+            <h3 class="m-1">Name: {{otherUser.name}}</h3>
+            <h3 class="m-1">Email: {{otherUser.email}}</h3>
+          </div>
+          <div class="m-4">
+            <button mat-raised-button color="warn" (click)="onCancel()">Return</button>
+          </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="!boolean_ViewMore">
+        <div *ngFor="let element of otherUser.blogEntities; let i = index">
+          <mat-card class="m-2">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h3 class="m-1">Blog Title: {{element.title}}</h3>
+                <h3 class="m-1">Created Date: {{element.create_Date}}</h3>
+              </div>
+              <div class="m-4">
+                <button mat-raised-button color="primary" (click)="onViewMore(i)">View More</button>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+        </div>
+        <div *ngIf="boolean_ViewMore">
+          <mat-card class="m-2">
+            <div>
+              <mat-card-header>
+                <div>
+                  <h1>{{blog.title}}</h1>
+                  <p>Author: {{blog.owner_Email}}</p>
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-card class="m-2">
+                  <h3 class="m-2">{{blog.body}}</h3>
+                </mat-card>
+                <mat-card class="m-2">
+                  <div class="d-flex justify-content-between">
+                    <div class="m-2">
+                      Update: {{blog.create_Date}}
+                    </div>
+                    <div class="m-2">
+                      Created: {{blog.create_Date}}
+                    </div>
+                  </div>
+                </mat-card>
 
+              </mat-card-content>
+              <mat-card-header>
+                <div>
+                  <h1>Comments</h1>
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="d-flex justify-content-center">
+                  <p>{{error}}</p>
+                </div>
+                <div *ngIf="!boolean_Comment">
+                  <mat-form-field style="width: 22rem" >
+                    <input matInput [(ngModel)]="comment_String" name="comment">
+                  </mat-form-field>
+                  <button mat-raised-button color="primary" (click)="onAddComment()" class="m-2" >Add Comment</button>
+                </div>
+
+
+                  <div *ngIf="!boolean_Comment" class="m-2">
+                    <div *ngFor="let element of comments; let i = index">
+                      <mat-card class="m-2">
+                        <div class="m-2 d-flex justify-content-between">
+                          <div>
+                            <h4>{{element.sender_Name}}</h4>
+                            <p>{{element.comment}}</p>
+                          </div>
+                          <div *ngIf="element.sender == currentId" class="m-4">
+                            <button mat-raised-button color="primary" (click)="onEditComment(i)" class="m-2">Edit</button>
+                            <button mat-raised-button color="warn" (click)="onDeleteComment(i)" class="m-2">Delete</button>
+                          </div>
+                        </div>
+                      </mat-card>
+                    </div>
+                  </div>
+                  <div *ngIf="boolean_Comment" class="m-2">
+                    <mat-card class="m-2">
+                      <div class="m-2 d-flex justify-content-between">
+                        <div>
+                          <h4>{{current_Comment.sender_Name}}</h4>
+                          <mat-form-field style="width: 18rem" >
+                            <input matInput [(ngModel)]="edit_Comment" name="comment">
+                          </mat-form-field>
+                          <div>
+                            <p>{{error}}</p>
+                          </div>
+                        </div>
+                        <div *ngIf="current_Comment.sender == currentId" class="m-4">
+                          <button mat-raised-button color="primary" (click)="onSaveComment()" class="m-1">Save</button>
+                          <button mat-raised-button color="warn" (click)="onCancel2()" class="m-1">Cancel</button>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+
+              </mat-card-content>
+
+            </div>
+          </mat-card>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
 
 <div *ngIf="boolean_Send">

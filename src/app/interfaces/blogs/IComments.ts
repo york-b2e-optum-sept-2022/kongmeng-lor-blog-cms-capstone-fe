@@ -1,5 +1,7 @@
 export interface IComments {
   id: number,
   comment: string,
-  sender: number
+  sender: number,
+  sender_Name: string,
+  sender_Email: string
 }

@@ -1,7 +1,7 @@
 import {IComments} from "./IComments";
 
 export interface IBlogs {
-  id: string,
+  id: number,
   title: string,
   body: string,
   create_Date: string,
