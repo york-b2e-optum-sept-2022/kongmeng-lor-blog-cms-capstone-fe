@@ -5,6 +5,7 @@ import {IBlogs} from "../../interfaces/blogs/IBlogs";
 import {AccountService} from "../account/account.service";
 import {IAccount} from "../../interfaces/IAccount";
 import {IPostBlog} from "../../interfaces/blogs/IPostBlog";
+import {IDeleteBlog} from "../../interfaces/blogs/IDeleteBlog";
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,11 @@ export class BlogsService {
     this.httpService.getBlogsById(id).pipe(first()).subscribe({
       next: value => {this.$current_Blogs.next(value)}, error: err => {console.log(err)}
     });
+  }
+  public deleteBlog(data: IDeleteBlog) {
+    this.httpService.deleteBlog(data).pipe(first()).subscribe({
+      next: value => {this.$current_Blogs.next(value)}, error: err => {console.log(err)}
+    })
   }
 
 }

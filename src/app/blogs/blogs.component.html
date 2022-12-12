@@ -16,7 +16,7 @@
       </mat-card-header>
     </mat-card>
   </div>
-  <div *ngIf="current_Account.blogEntities.length != 0">
+  <div *ngIf="current_Account.blogEntities.length != 0 && !booleanEdit">
     <div *ngFor="let element of my_Blogs; let i = index">
       <mat-card class="m-2">
         <mat-card-header>
@@ -38,15 +38,51 @@
         </mat-card-content>
         <mat-card-footer class="d-flex justify-content-end">
           <mat-card-content>
-            <button mat-raised-button class="m-2" color="primary">Edit</button>
-            <button mat-raised-button class="m-2">Comment</button>
-            <button mat-raised-button color="warn" class="m-2">Delete</button>
+            <button mat-raised-button class="m-2" color="primary" (click)="onEdit(i)">Edit</button>
+            <button mat-raised-button class="m-2" >Comment</button>
+            <button mat-raised-button color="warn" class="m-2" (click)="onDelete(i)">Delete</button>
           </mat-card-content>
         </mat-card-footer>
       </mat-card>
     </div>
   </div>
-
+  <div *ngIf="booleanEdit && !booleanCreateBlogs && !booleanViewAll">
+    <mat-card class="m-2">
+      <mat-card-header>
+        <div>
+          <div>
+            <h2>Title: </h2>
+          </div>
+          <mat-form-field>
+            <input matInput [(ngModel)]="editTitle" name="title">
+          </mat-form-field>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <div>
+            <h2>Body: </h2>
+          </div>
+          <mat-form-field>
+            <textarea matInput [(ngModel)]="editBody" name="body"></textarea>
+          </mat-form-field>
+        </div>
+        <div>
+          <h4 class="m-1">Owner: {{blog.owner_Id}}</h4>
+          <div class="d-flex">
+            <h5 class="m-1">Create Date: {{blog.create_Date}}</h5>
+            <h5 class="m-1">Update Date: {{blog.update_Date}}</h5>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-footer class="d-flex justify-content-end">
+        <mat-card-content>
+          <button mat-raised-button class="m-2" color="primary" (click)="saveEditBlog()">Save</button>
+          <button mat-raised-button class="m-2" color="warn">Cancel</button>
+        </mat-card-content>
+      </mat-card-footer>
+    </mat-card>
+  </div>
 </div>
 
 <div *ngIf="booleanCreateBlogs">

@@ -12,6 +12,7 @@ import {IDeleteComment} from "../../interfaces/blogs/IDeleteComment";
 import {IAddComment} from "../../interfaces/blogs/IAddComment";
 import {IEditComment} from "../../interfaces/blogs/IEditComment";
 import {IPostBlog} from "../../interfaces/blogs/IPostBlog";
+import {IDeleteBlog} from "../../interfaces/blogs/IDeleteBlog";
 
 @Injectable({
   providedIn: 'root'
@@ -65,10 +66,7 @@ export class HttpService {
   public getBlogsById(id: number): Observable<IBlogs[]> {
     return this.httpClient.get(`http://localhost:8008/api/account/get/blogsById?id=${id}`) as Observable<IBlogs[]>;
   }
-
-
-
-
-
-
+  public deleteBlog(data: IDeleteBlog): Observable<IBlogs[]> {
+    return this.httpClient.delete(`http://localhost:8008/api/account/delete/blog?ownerId=${data.ownerId}&blogId=${data.blogId}`) as Observable<IBlogs[]>
+  }
 }

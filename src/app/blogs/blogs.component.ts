@@ -5,6 +5,9 @@ import {IBlogs} from "../interfaces/blogs/IBlogs";
 import {BlogsService} from "../services/blogs/blogs.service";
 import {IAccount} from "../interfaces/IAccount";
 import {IPostBlog} from "../interfaces/blogs/IPostBlog";
+import {IDeleteBlog} from "../interfaces/blogs/IDeleteBlog";
+import {IComments} from "../interfaces/blogs/IComments";
+import {IEditBlogs} from "../interfaces/blogs/IEditBlogs";
 
 @Component({
   selector: 'app-blogs',
@@ -61,6 +64,7 @@ export class BlogsComponent implements OnDestroy{
     this.booleanCreateBlogs = false;
     this.blogService.$createBlogs.next(false);
     this.blogService.$viewAllBlogs.next(true);
+    this.booleanEdit = false;
   }
   booleanViewMine: boolean = false;
   viewMyBlogs() {
@@ -69,6 +73,7 @@ export class BlogsComponent implements OnDestroy{
     this.booleanCreateBlogs = false;
     this.blogService.$createBlogs.next(false);
     this.blogService.$viewAllBlogs.next(false);
+    this.booleanEdit = false;
   }
   booleanCreateBlogs: boolean = false;
   createBlogs() {
@@ -77,6 +82,7 @@ export class BlogsComponent implements OnDestroy{
     this.booleanCreateBlogs = true;
     this.blogService.$createBlogs.next(true);
     this.blogService.$viewAllBlogs.next(false);
+    this.booleanEdit = false;
   }
   ngOnDestroy() {
     this.sub1.unsubscribe();
@@ -105,4 +111,44 @@ export class BlogsComponent implements OnDestroy{
     this.blogService.getBlogsById(this.current_Account.id);
     this.onCancel();
   }
+  blogId: number = -1;
+  onDelete(i: number) {
+    this.blogId = this.my_Blogs[i].id;
+    const data: IDeleteBlog = {
+      ownerId: this.current_Account.id,
+      blogId: this.blogId
+    }
+    this.blogService.deleteBlog(data);
+  }
+  blog: IBlogs = {
+    id: -1,
+    title: "",
+    body: "",
+    create_Date: "",
+    update_Date: "",
+    owner_Email: "",
+    owner_Id: -1,
+    view_Counts: -1,
+    view_Accounts: [],
+    commentsLists: []
+  }
+  booleanEdit: boolean = false;
+  editTitle: string = "";
+  editBody: string = "";
+  onEdit(i: number) {
+    this.blog = this.my_Blogs[i];
+    this.editTitle = this.blog.title;
+    this.editBody = this.blog.body;
+    this.booleanEdit = true;
+  }
+  saveEditBlog() {
+    const temp: IEditBlogs = {
+      Id: this.blog.id,
+      title: this.editTitle,
+      body: this.editBody,
+      update_Date: "12-12-2022"
+    }
+
+  }
+
 }
