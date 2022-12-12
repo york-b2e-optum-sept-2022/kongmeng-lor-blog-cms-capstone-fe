@@ -30,7 +30,6 @@ export class MessageComponent implements OnDestroy{
     this.sub4 = this.accountService.$messages.subscribe({
       next: value => {
         if (value != null) {
-          console.log(value);
           this.messages = value
         }
       }
@@ -103,6 +102,7 @@ export class MessageComponent implements OnDestroy{
     this.accountService.sendMessage(message);
     this.message = "";
     this.booleanReply = false;
+    console.log(this.messages.length);
   }
 
   onReturn() {

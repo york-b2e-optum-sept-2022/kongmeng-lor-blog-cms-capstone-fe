@@ -30,9 +30,15 @@
           </div>
           <div>
             <h4 class="m-1">Owner: {{element.owner_Email}}</h4>
-            <div class="d-flex">
+            <div class="d-flex justify-content-between">
               <h5 class="m-1">Create Date: {{element.create_Date}}</h5>
               <h5 class="m-1">Update Date: {{element.update_Date}}</h5>
+            </div>
+            <div>
+              <h5>Total View: {{element.view_Counts}}</h5>
+            </div>
+            <div>
+              <h5>Total Comments: {{element.commentsLists.length}}</h5>
             </div>
           </div>
         </mat-card-content>
@@ -73,6 +79,12 @@
             <h5 class="m-1">Create Date: {{blog.create_Date}}</h5>
             <h5 class="m-1">Update Date: {{blog.update_Date}}</h5>
           </div>
+          <div>
+            <h5>Total View: {{blog.view_Counts}}</h5>
+          </div>
+          <div>
+            <h5>Total Comments: {{blog.commentsLists.length}}</h5>
+          </div>
         </div>
       </mat-card-content>
       <mat-card-footer class="d-flex justify-content-end">
@@ -105,6 +117,12 @@
           <div class="d-flex">
             <h5 class="m-1">Create Date: {{blog.create_Date}}</h5>
             <h5 class="m-1">Update Date: {{blog.update_Date}}</h5>
+          </div>
+          <div>
+            <h5>Total View: {{blog.view_Counts}}</h5>
+          </div>
+          <div>
+            <h5>Total Comments: {{blog.commentsLists.length}}</h5>
           </div>
         </div>
       </mat-card-content>
@@ -178,6 +196,12 @@
           <div class="d-flex">
             <h5 class="m-1">Create Date: {{element.create_Date | date}} </h5>
             <h5 class="m-1">Update Date: {{element.update_Date}}</h5>
+          </div>
+          <div>
+            <h5>Total View: {{element.view_Counts}}</h5>
+          </div>
+          <div>
+            <h5>Total Comments: {{element.commentsLists.length}}</h5>
           </div>
           <div *ngIf="booleanCommentsView">
             <h2 class="m-2">Comments</h2>
