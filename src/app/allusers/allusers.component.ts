@@ -172,6 +172,8 @@ export class AllusersComponent implements OnDestroy{
       sender_Id: this.sender_Id
     }
     this.accountService.sendMessage(message);
+    this.message = "";
+    this.boolean_Send = false;
   }
 
   current_Comment: IComments = {

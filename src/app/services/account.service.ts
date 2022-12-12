@@ -25,7 +25,7 @@ export class AccountService {
   $error = new BehaviorSubject<string>("");
   $logIn = new BehaviorSubject<boolean>(false);
   $currentId = new BehaviorSubject<number>(-1);
-  $message = new BehaviorSubject<IMessages[] | null>(null);
+  $messages = new BehaviorSubject<IMessages[] | null>(null);
   $boolean_Full_Blogs = new BehaviorSubject<boolean>(false);
   $current_Blog = new BehaviorSubject<IBlogs | null>(null);
 
@@ -38,8 +38,6 @@ export class AccountService {
     email_From: "",
     email_To: "",
   }
-
-
   public createAccount(data: ICreateAccount) {
     this.httpService.createAccount(data).pipe(first()).subscribe({
       next: data => {console.log(data)}, error: err => {console.log(err)}
@@ -73,14 +71,15 @@ export class AccountService {
   }
   public sendMessage(data: IMessageSend) {
     this.httpService.sendMessage(data).pipe(first()).subscribe({
-      next: data => {
-        this.message = data;
+      next: value => {
+        this.message = value;
+        this.getAllMessagesById(data.current_Id);
       }, error: err => {console.log(err)}
     })
   }
   public getAllMessagesById(id: number) {
     this.httpService.getMessagesById(id).subscribe({
-      next: value => {this.$message.next(value)}, error: err => {console.log(err)}
+      next: value => {this.$messages.next(value)}, error: err => {console.log(err)}
     })
   }
   public updateViews(data: IUpdateViews) {

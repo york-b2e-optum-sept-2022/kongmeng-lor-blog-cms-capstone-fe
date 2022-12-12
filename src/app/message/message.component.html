@@ -19,6 +19,87 @@
           <h4 class="m-2">Inbox is empty.</h4>
         </mat-card>
       </div>
+      <div *ngIf="messages.length!=0">
+
+        <div *ngIf="!booleanHistory && !booleanReply">
+          <div *ngFor="let element of messages; let i  = index">
+            <mat-card class="m-2">
+              <mat-card-header>
+                <h1 class="m-2">{{element.owner}}</h1>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-card>
+                  <mat-card-header>
+                    <div>
+                      <h4>From: {{element.email_From}}</h4>
+                      <h4>To: {{element.email_To}}</h4>
+                    </div>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <h4>Message: {{element.current_Message}}</h4>
+                    <button mat-raised-button color="primary" class="m-2" (click)="onHistory(i)">History</button>
+                    <button mat-raised-button color="accent" class="m-2" (click)="onReply(i)">Reply</button>
+                  </mat-card-content>
+                </mat-card>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+
+        <div *ngIf="booleanHistory">
+          <mat-card class="m-2">
+            <mat-card-header>
+              <h1 class="m-2">{{current_Message.owner}}</h1>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-card>
+                <mat-card-header>
+                  <div>
+                    <h4>From: {{current_Message.email_From}}</h4>
+                    <h4>To: {{current_Message.email_To}}</h4>
+                  </div>
+                </mat-card-header>
+              <mat-card-content>
+                <h4>Message: {{current_Message.current_Message}}</h4>
+                <button mat-raised-button color="warn" class="m-2" (click)="onReturn()">Return</button>
+                <div *ngFor="let data of current_Message.historyEntities">
+                  <mat-card class="m-2">
+                    <h4 class="m-2">Who sent: {{data.sender}}</h4>
+                    <h4 class="m-2">Message: {{data.message}}</h4>
+                  </mat-card>
+                </div>
+              </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div *ngIf="booleanReply">
+          <mat-card class="m-2">
+            <mat-card-header>
+              <h1 class="m-2">{{current_Message.owner}}</h1>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-card>
+                <mat-card-header>
+                  <div>
+                    <h4>From: {{current_Message.email_From}}</h4>
+                    <h4>To: {{current_Message.email_To}}</h4>
+                    <h4>Current Message: {{current_Message.current_Message}}</h4>
+                    <h4>{{error}}</h4>
+                    <mat-form-field style="width: 28rem">
+                      <input matInput [(ngModel)]="message" name="message" placeholder="message">
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="m-2" (click)="replySaved()">Send</button>
+                    <button mat-raised-button color="warn" class="m-2" (click)="onReturn()">Cancel</button>
+                  </div>
+                </mat-card-header>
+              </mat-card>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
@@ -66,8 +147,8 @@
               <mat-form-field style="width: 28rem">
                 <input matInput [(ngModel)]="message" name="message" placeholder="message">
               </mat-form-field>
-            <button mat-raised-button color="primary" class="m-2">Send</button>
-            <button mat-raised-button color="accent" class="m-2">Cancel</button>
+            <button mat-raised-button color="primary" class="m-2" (click)="onSend()">Send</button>
+            <button mat-raised-button color="accent" class="m-2" (click)="onCancelSend()">Cancel</button>
           </mat-card-content>
         </mat-card>
 

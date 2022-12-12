@@ -22,10 +22,9 @@ export class MainComponent implements OnDestroy{
       }
     });
     this.accountService.getAllMessagesById(this.current_Account.id);
-    this.sub2 = this.accountService.$message.subscribe({
+    this.sub2 = this.accountService.$messages.subscribe({
       next: value => {if (value != null) {
         this.messages = value;
-        console.log(this.messages);
       }}
     });
     this.sub3 = this.accountService.$boolean_Full_Blogs.subscribe({
