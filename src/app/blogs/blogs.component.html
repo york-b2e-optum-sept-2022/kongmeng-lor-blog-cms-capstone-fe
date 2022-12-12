@@ -174,21 +174,26 @@
       </mat-card-content>
       <mat-card-content>
         <div>
-          <h2>{{element.body}}</h2>
-        </div>
-        <div>
           <h4 class="m-1">Owner: {{element.owner_Email}}</h4>
           <div class="d-flex">
             <h5 class="m-1">Create Date: {{element.create_Date}}</h5>
             <h5 class="m-1">Update Date: {{element.update_Date}}</h5>
           </div>
+          <div *ngIf="booleanCommentsView">
+            <h2 class="m-2">Comments</h2>
+            <div *ngFor="let test of element.commentsLists">
+              <mat-card class="m-2">
+                <h5 class="m-2">{{test.sender}}</h5>
+                <h5 class="m-2">{{test.comment}}</h5>
+              </mat-card>
+            </div>
+          </div>
         </div>
       </mat-card-content>
       <mat-card-footer class="m-2 d-flex justify-content-end">
+
         <mat-card-content>
-          <button mat-raised-button class="m-2">Comments</button>
-          <button mat-raised-button class="m-2" color="primary" *ngIf="element.owner_Id === current_Account.id">Edit</button>
-          <button mat-raised-button class="m-2" color="warn" *ngIf="element.owner_Id === current_Account.id">Delete</button>
+          <button mat-raised-button class="m-2" (click)="viewAllComments()">Comments</button>
         </mat-card-content>
       </mat-card-footer>
     </mat-card>

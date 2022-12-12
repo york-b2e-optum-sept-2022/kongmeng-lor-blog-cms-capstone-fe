@@ -1,12 +1,12 @@
 <div *ngIf="!boolean_Send && !boolean_Blogs">
   <mat-form-field appearance="fill" style="width: 37rem">
     <mat-label>search users</mat-label>
-    <input matInput [(ngModel)]="search">
+    <input matInput [ngModel]="search" (ngModelChange)="onFilterSearchAccounts($event)">
   </mat-form-field>
 </div>
 
 <div *ngIf="!boolean_Send && !boolean_Blogs">
-  <div *ngFor="let element of allAccounts; let i = index" >
+  <div *ngFor="let element of displayAccounts; let i = index" >
     <mat-card class="m-2" >
       <mat-card-header>
         <div>

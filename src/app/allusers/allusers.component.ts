@@ -22,6 +22,7 @@ export class AllusersComponent implements OnDestroy{
       next: value => {if (value!= null) {
         this.allAccounts = value;
         this.onFilterAccounts();
+        this.displayAccounts = this.allAccounts;
       }}
     });
     this.sub2 = this.accountService.$currentId.subscribe({
@@ -32,7 +33,7 @@ export class AllusersComponent implements OnDestroy{
       next: value => {this.error = value}
     });
 
-    this.accountService.$current_Blog.subscribe({
+    this.sub4 = this.accountService.$current_Blog.subscribe({
       next: value => {
         if (value!= null) {
           this.blog = value;
@@ -42,15 +43,20 @@ export class AllusersComponent implements OnDestroy{
         }
       }
     });
-
-
-
-
   }
+
 
   onFilterAccounts() {
     const temp = this.allAccounts.filter(index => index.id != this.currentId);
     this.allAccounts = temp;
+  }
+  displayAccounts: IAccount[] = [];
+  onFilterSearchAccounts(search: string) {
+    const temp = this.allAccounts.filter((word) => {
+      return word.email.includes(search) || word.name.includes(search);
+      }
+    );
+    this.displayAccounts = temp;
   }
 
   total_Views: number = -1;
@@ -60,6 +66,7 @@ export class AllusersComponent implements OnDestroy{
   sub1: Subscription;
   sub2: Subscription;
   sub3: Subscription;
+  sub4: Subscription;
 
   error: string = "";
 
@@ -79,19 +86,23 @@ export class AllusersComponent implements OnDestroy{
 
   onSend(i: number) {
     this.boolean_Send = true;
-    this.otherUser = this.allAccounts[i];
+    this.otherUser = this.displayAccounts[i];
+    this.search = "";
   }
   onCancel() {
     this.boolean_Send = false;
     this.boolean_Blogs = false;
+    this.search = "";
+    this.onFilterSearchAccounts(this.search);
 
   }
   boolean_Blogs: boolean = false;
 
   onViewBlogs(i: number) {
-    this.otherUser = this.allAccounts[i];
+    this.otherUser = this.displayAccounts[i];
     this.boolean_Blogs = true;
     this.accountService.$boolean_Full_Blogs.next(true);
+    this.search = "";
   }
   blog: IBlogs = {
     id: -1,
@@ -210,11 +221,15 @@ export class AllusersComponent implements OnDestroy{
     this.boolean_Comment = false;
   }
   onCancel2() {
-    this.boolean_Comment = false
+    this.boolean_Comment = false;
+    this.search = "";
+    this.onFilterSearchAccounts(this.search);
   }
   onBackMain() {
     this.boolean_ViewMore = false;
     this.boolean_Comment = false;
+    this.search = "";
+    this.onFilterSearchAccounts(this.search);
   }
 
 }

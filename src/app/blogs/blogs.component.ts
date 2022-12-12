@@ -219,7 +219,21 @@ export class BlogsComponent implements OnDestroy{
           this.blog.commentsLists = this.blog.commentsLists.sort(function (a,b) { return b.id - a.id});
       }
     });
-    console.log(this.blog);
+  }
+  num: number = 0;
+  booleanCommentsView: boolean = false;
+  viewAllComments() {
+    console.log(this.num)
+    if (this.num === 0) {
+      this.booleanCommentsView = true;
+      this.num = 1;
+      return;
+    }
+    if (this.num === 1) {
+      this.booleanCommentsView = false;
+      this.num = 0;
+      return;
+    }
   }
 
 }
