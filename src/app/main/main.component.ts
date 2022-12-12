@@ -1,9 +1,11 @@
 import {Component, OnDestroy} from '@angular/core';
-import {AccountService} from "../services/account.service";
+import {AccountService} from "../services/account/account.service";
 import {Subscription} from "rxjs";
 import {IAccount} from "../interfaces/IAccount";
 import {IBlogs} from "../interfaces/blogs/IBlogs";
 import {IMessages} from "../interfaces/messages/IMessages";
+import {BlogsService} from "../services/blogs/blogs.service";
+import {nextMonthDisabled} from "@ng-bootstrap/ng-bootstrap/datepicker/datepicker-tools";
 
 
 @Component({
@@ -12,7 +14,7 @@ import {IMessages} from "../interfaces/messages/IMessages";
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnDestroy{
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private blogService: BlogsService) {
     this.sub1 = this.accountService.$current_Account.subscribe({
       next: value => {
         if (value != null) {
@@ -30,13 +32,22 @@ export class MainComponent implements OnDestroy{
     this.sub3 = this.accountService.$boolean_Full_Blogs.subscribe({
       next: value => {this.viewFullBlogs = value}
     });
-
-
+    this.sub4 = this.blogService.$createBlogs.subscribe({
+      next: value => {this.createBlogs = value}
+    });
+    this.sub5 = this.blogService.$viewAllBlogs.subscribe({
+      next: value => {this.viewAllBlogs = value}
+    });
   }
 
   sub1: Subscription;
   sub2: Subscription;
   sub3: Subscription;
+  sub4: Subscription;
+  sub5: Subscription;
+
+  createBlogs: boolean = false;
+  viewAllBlogs: boolean = false;
   messages: IMessages[] = [];
 
   viewFullBlogs: boolean = false;
@@ -60,6 +71,8 @@ export class MainComponent implements OnDestroy{
     this.sub1.unsubscribe();
     this.sub2.unsubscribe();
     this.sub3.unsubscribe();
+    this.sub4.unsubscribe();
+    this.sub5.unsubscribe();
   }
   message: IMessages = {
     owner: "",

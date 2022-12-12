@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import {HttpService} from "./http.service";
-import {ICreateAccount} from "../interfaces/create/ICreateAccount";
+import {HttpService} from "../http/http.service";
+import {ICreateAccount} from "../../interfaces/create/ICreateAccount";
 import {BehaviorSubject, connect, first, Subscription} from "rxjs";
-import {ILogIn} from "../interfaces/create/ILogIn";
-import {IAccount} from "../interfaces/IAccount";
-import {IBlogs} from "../interfaces/blogs/IBlogs";
-import {IMessageSend} from "../interfaces/messages/IMessageSend";
-import {IMessages} from "../interfaces/messages/IMessages";
-import {IUpdateViews} from "../interfaces/blogs/IUpdateViews";
-import {IDeleteComment} from "../interfaces/blogs/IDeleteComment";
-import {IAddComment} from "../interfaces/blogs/IAddComment";
-import {IEditComment} from "../interfaces/blogs/IEditComment";
+import {ILogIn} from "../../interfaces/create/ILogIn";
+import {IAccount} from "../../interfaces/IAccount";
+import {IBlogs} from "../../interfaces/blogs/IBlogs";
+import {IMessageSend} from "../../interfaces/messages/IMessageSend";
+import {IMessages} from "../../interfaces/messages/IMessages";
+import {IUpdateViews} from "../../interfaces/blogs/IUpdateViews";
+import {IDeleteComment} from "../../interfaces/blogs/IDeleteComment";
+import {IAddComment} from "../../interfaces/blogs/IAddComment";
+import {IEditComment} from "../../interfaces/blogs/IEditComment";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,6 @@ export class AccountService {
   constructor(private httpService: HttpService) {}
 
   $current_Account = new BehaviorSubject<IAccount | null>(null);
-  $blogs = new BehaviorSubject<IBlogs[] | null>(null);
   $allAccounts = new BehaviorSubject<IAccount[] | null>(null);
   $error = new BehaviorSubject<string>("");
   $logIn = new BehaviorSubject<boolean>(false);
@@ -38,6 +37,7 @@ export class AccountService {
     email_From: "",
     email_To: "",
   }
+
   public createAccount(data: ICreateAccount) {
     this.httpService.createAccount(data).pipe(first()).subscribe({
       next: data => {console.log(data)}, error: err => {console.log(err)}
@@ -56,13 +56,6 @@ export class AccountService {
         this.$error.next("Please make sure your email and password is enter.");
       }
     })
-  }
-  public getAllBlogs() {
-    this.httpService.getAllBlogs().pipe(first()).subscribe({
-      next: value => {
-        this.$blogs.next(value);
-      }, error: err => {console.log(err)}
-    });
   }
   public getAllAccounts() {
     this.httpService.getAllAccounts().subscribe({

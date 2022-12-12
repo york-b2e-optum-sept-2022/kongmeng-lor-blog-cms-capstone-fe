@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {ICreateAccount} from "../interfaces/create/ICreateAccount";
+import {ICreateAccount} from "../../interfaces/create/ICreateAccount";
 import {Observable} from "rxjs";
-import {ILogIn} from "../interfaces/create/ILogIn";
-import {IAccount} from "../interfaces/IAccount";
-import {IBlogs} from "../interfaces/blogs/IBlogs";
-import {IMessageSend} from "../interfaces/messages/IMessageSend";
-import {IMessages} from "../interfaces/messages/IMessages";
-import {IUpdateViews} from "../interfaces/blogs/IUpdateViews";
-import {IDeleteComment} from "../interfaces/blogs/IDeleteComment";
-import {IAddComment} from "../interfaces/blogs/IAddComment";
-import {IEditComment} from "../interfaces/blogs/IEditComment";
+import {ILogIn} from "../../interfaces/create/ILogIn";
+import {IAccount} from "../../interfaces/IAccount";
+import {IBlogs} from "../../interfaces/blogs/IBlogs";
+import {IMessageSend} from "../../interfaces/messages/IMessageSend";
+import {IMessages} from "../../interfaces/messages/IMessages";
+import {IUpdateViews} from "../../interfaces/blogs/IUpdateViews";
+import {IDeleteComment} from "../../interfaces/blogs/IDeleteComment";
+import {IAddComment} from "../../interfaces/blogs/IAddComment";
+import {IEditComment} from "../../interfaces/blogs/IEditComment";
+import {IPostBlog} from "../../interfaces/blogs/IPostBlog";
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,12 @@ export class HttpService {
   public editComment(data: IEditComment): Observable<IBlogs> {
     return this.httpClient.put("http://localhost:8008/api/blog/edit/comment",data) as Observable<IBlogs>;
   }
-
+  public createBlog(data: IPostBlog) {
+    return this.httpClient.post("http://localhost:8008/api/account/post/blog",data);
+  }
+  public getBlogsById(id: number): Observable<IBlogs[]> {
+    return this.httpClient.get(`http://localhost:8008/api/account/get/blogsById?id=${id}`) as Observable<IBlogs[]>;
+  }
 
 
 

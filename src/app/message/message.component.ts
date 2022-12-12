@@ -1,5 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
-import {AccountService} from "../services/account.service";
+import {AccountService} from "../services/account/account.service";
 import {IAccount} from "../interfaces/IAccount";
 import {Subscription} from "rxjs";
 import {IMessages} from "../interfaces/messages/IMessages";

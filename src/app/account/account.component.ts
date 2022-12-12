@@ -1,5 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
-import {AccountService} from "../services/account.service";
+import {AccountService} from "../services/account/account.service";
 import {ILogIn} from "../interfaces/create/ILogIn";
 import {Subscription} from "rxjs";
 import {ICreateAccount} from "../interfaces/create/ICreateAccount";
