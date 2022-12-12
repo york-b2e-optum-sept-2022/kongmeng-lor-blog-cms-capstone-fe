@@ -13,6 +13,7 @@ import {IAddComment} from "../../interfaces/blogs/IAddComment";
 import {IEditComment} from "../../interfaces/blogs/IEditComment";
 import {IPostBlog} from "../../interfaces/blogs/IPostBlog";
 import {IDeleteBlog} from "../../interfaces/blogs/IDeleteBlog";
+import {IEditBlogs} from "../../interfaces/blogs/IEditBlogs";
 
 @Injectable({
   providedIn: 'root'
@@ -68,5 +69,9 @@ export class HttpService {
   }
   public deleteBlog(data: IDeleteBlog): Observable<IBlogs[]> {
     return this.httpClient.delete(`http://localhost:8008/api/account/delete/blog?ownerId=${data.ownerId}&blogId=${data.blogId}`) as Observable<IBlogs[]>
+  }
+
+  public editBlog(data: IEditBlogs): Observable<IBlogs> {
+    return this.httpClient.put("http://localhost:8008/api/blog/edit", data) as Observable<IBlogs>;
   }
 }

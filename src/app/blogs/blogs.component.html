@@ -16,7 +16,7 @@
       </mat-card-header>
     </mat-card>
   </div>
-  <div *ngIf="current_Account.blogEntities.length != 0 && !booleanEdit">
+  <div *ngIf="current_Account.blogEntities.length != 0 && !booleanEdit && !booleanView2">
     <div *ngFor="let element of my_Blogs; let i = index">
       <mat-card class="m-2">
         <mat-card-header>
@@ -39,14 +39,14 @@
         <mat-card-footer class="d-flex justify-content-end">
           <mat-card-content>
             <button mat-raised-button class="m-2" color="primary" (click)="onEdit(i)">Edit</button>
-            <button mat-raised-button class="m-2" >Comment</button>
+            <button mat-raised-button class="m-2" (click)="onViewComments(i)">Comment</button>
             <button mat-raised-button color="warn" class="m-2" (click)="onDelete(i)">Delete</button>
           </mat-card-content>
         </mat-card-footer>
       </mat-card>
     </div>
   </div>
-  <div *ngIf="booleanEdit && !booleanCreateBlogs && !booleanViewAll">
+  <div *ngIf="booleanEdit && !booleanCreateBlogs && !booleanViewAll && !booleanView2">
     <mat-card class="m-2">
       <mat-card-header>
         <div>
@@ -78,11 +78,67 @@
       <mat-card-footer class="d-flex justify-content-end">
         <mat-card-content>
           <button mat-raised-button class="m-2" color="primary" (click)="saveEditBlog()">Save</button>
-          <button mat-raised-button class="m-2" color="warn">Cancel</button>
+          <button mat-raised-button class="m-2" color="warn" (click)="onCancelEdit()">Cancel</button>
         </mat-card-content>
       </mat-card-footer>
     </mat-card>
   </div>
+
+  <div *ngIf="booleanView2 && !booleanEdit && !booleanCreateBlogs && !booleanViewAll">
+
+    <mat-card class="m-2">
+      <mat-card-header>
+        <div>
+          <div>
+            <h2>Title: {{blog.title}}</h2>
+          </div>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <div>
+            <h2>{{blog.body}}</h2>
+          </div>
+        </div>
+        <div>
+          <h4 class="m-1">Owner: {{blog.owner_Email}}</h4>
+          <div class="d-flex">
+            <h5 class="m-1">Create Date: {{blog.create_Date}}</h5>
+            <h5 class="m-1">Update Date: {{blog.update_Date}}</h5>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-footer >
+        <mat-card-content>
+
+            <mat-form-field >
+              <input matInput [(ngModel)]="comment" name="comment">
+            </mat-form-field>
+
+          <button mat-raised-button class="m-2" color="primary" (click)="onAddComment()">Comment</button>
+          <button mat-raised-button class="m-2" color="warn" (click)="onCancel2()">Cancel</button>
+        </mat-card-content>
+      </mat-card-footer>
+      <mat-card-footer>
+
+        <div *ngFor="let element of blog.commentsLists; let i = index">
+          <mat-card class="m-3">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h4 class="m-2">{{element.sender_Name}}</h4>
+                <h4 class="m-2">{{element.comment}}</h4>
+              </div>
+              <div>
+                <button mat-raised-button color="warn" class="m-4" (click)="onDeleteComment(i)" *ngIf="element.sender === current_Account.id">Delete</button>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+
+  </div>
+
 </div>
 
 <div *ngIf="booleanCreateBlogs">

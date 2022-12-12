@@ -21,7 +21,6 @@ export class AllusersComponent implements OnDestroy{
     this.sub1 = this.accountService.$allAccounts.subscribe({
       next: value => {if (value!= null) {
         this.allAccounts = value;
-        console.log(this.allAccounts);
         this.onFilterAccounts();
       }}
     });
@@ -124,19 +123,23 @@ export class AllusersComponent implements OnDestroy{
 
   onDeleteComment(i: number) {
     this.comments = [];
+
     const data: IDeleteComment = {
       Id: this.blog.id,
       index: i,
       user_Id: this.currentId
     }
     this.accountService.deleteComment(data);
+
     this.accountService.$current_Blog.subscribe({
       next: value => {
         if (value!=null)
           this.blog = value;
       }
     });
+
   }
+
 
   comment_String: string = "";
 
