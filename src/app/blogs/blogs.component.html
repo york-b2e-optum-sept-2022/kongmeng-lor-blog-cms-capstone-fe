@@ -176,7 +176,7 @@
         <div>
           <h4 class="m-1">Owner: {{element.owner_Email}}</h4>
           <div class="d-flex">
-            <h5 class="m-1">Create Date: {{element.create_Date}}</h5>
+            <h5 class="m-1">Create Date: {{element.create_Date | date}} </h5>
             <h5 class="m-1">Update Date: {{element.update_Date}}</h5>
           </div>
           <div *ngIf="booleanCommentsView">

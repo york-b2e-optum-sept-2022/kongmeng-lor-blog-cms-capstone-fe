@@ -138,8 +138,8 @@ export class BlogsComponent implements OnDestroy{
     id: -1,
     title: "",
     body: "",
-    create_Date: "",
-    update_Date: "",
+    create_Date: new Date(),
+    update_Date: new Date(),
     owner_Email: "",
     owner_Id: -1,
     view_Counts: -1,
@@ -159,8 +159,7 @@ export class BlogsComponent implements OnDestroy{
     const temp: IEditBlogs = {
       Id: this.blog.id,
       title: this.editTitle,
-      body: this.editBody,
-      update_Date: "12-12-2022"
+      body: this.editBody
     }
     this.blogService.editBlog(temp, this.current_Account.id);
     this.title = "";
