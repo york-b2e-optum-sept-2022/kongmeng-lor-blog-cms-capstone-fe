@@ -16,6 +16,7 @@
       </mat-card-header>
     </mat-card>
   </div>
+
   <div *ngIf="current_Account.blogEntities.length != 0 && !booleanEdit && !booleanView2">
     <div *ngFor="let element of my_Blogs; let i = index">
       <mat-card class="m-2">
@@ -52,6 +53,7 @@
       </mat-card>
     </div>
   </div>
+
   <div *ngIf="booleanEdit && !booleanCreateBlogs && !booleanViewAll && !booleanView2">
     <mat-card class="m-2">
       <mat-card-header>
@@ -97,7 +99,6 @@
   </div>
 
   <div *ngIf="booleanView2 && !booleanEdit && !booleanCreateBlogs && !booleanViewAll">
-
     <mat-card class="m-2">
       <mat-card-header>
         <div>
@@ -194,7 +195,7 @@
         <div>
           <h4 class="m-1">Owner: {{element.owner_Email}}</h4>
           <div class="d-flex">
-            <h5 class="m-1">Create Date: {{element.create_Date | date}} </h5>
+            <h5 class="m-1">Create Date: {{element.create_Date}} </h5>
             <h5 class="m-1">Update Date: {{element.update_Date}}</h5>
           </div>
           <div>
