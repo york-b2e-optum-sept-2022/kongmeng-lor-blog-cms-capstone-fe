@@ -38,66 +38,16 @@
   <mat-card class="m-2" style="width: 39rem">
     <mat-card-header>
       <h1>Message</h1>
+      <mat-icon> message</mat-icon>
     </mat-card-header>
     <mat-card-content class="mt-2">
-
-
-      <div>
-        <button mat-raised-button class="m-1">View Message History</button>
-        <button mat-raised-button class="m-1">Send Message</button>
-      </div>
-
-      <div *ngIf="!boolean_History">
-        <div *ngFor="let element of messages; let i = index">
-          <mat-card class="m-2">
-            <mat-card class="m-3">
-              <mat-card-header>
-                <h2>Name: {{element.owner}}</h2>
-              </mat-card-header>
-            </mat-card>
-            <mat-card-content class="mb-2-1">
-              <mat-card>
-                <h4 class="m-2">Who sent: {{element.email_From}}</h4>
-                <h4 class="m-2">Receiving: {{element.email_To}}</h4>
-              </mat-card>
-              <mat-card class="mt-2 d-flex justify-content-between" >
-                <h4 class="m-2">Current Message:{{element.current_Message}} </h4>
-                <button mat-raised-button color="primary" (click)="onHistory(i)">View Message History</button>
-              </mat-card>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-
-
-      <div *ngIf="boolean_History">
-        <mat-card class="m-2">
-          <mat-card class="m-3">
-            <mat-card-header>
-              <h2>Name: {{message.owner}}</h2>
-            </mat-card-header>
-          </mat-card>
-          <mat-card-content class="mb-2-1">
-            <mat-card>
-              <h4 class="m-2">Who sent: {{message.email_From}}</h4>
-              <h4 class="m-2">Receiving: {{message.email_To}}</h4>
-            </mat-card>
-            <mat-card class="mt-2 d-flex justify-content-between" >
-              <h4 class="m-2">Current Message:{{message.current_Message}} </h4>
-              <mat-card-content>
-                <mat-card *ngFor="let element of message.historyEntities; let i = index" class="m-2">
-                  <h4 class="m-2">{{i+1}}</h4>
-                  <h4 class="m-2">Who sent: {{element.sender}}</h4>
-                  <h4 class="m-2">Message: {{element.message}}</h4>
-                </mat-card>
-              </mat-card-content>
-              <button mat-raised-button color="warn" (click)="onReturn()">Return</button>
-            </mat-card>
-          </mat-card-content>
-        </mat-card>
-      </div>
+      <app-message></app-message>
     </mat-card-content>
   </mat-card>
+
+
+
+
 
   <mat-card class="m-2" style="width: 39rem">
     <mat-card-header *ngIf="!viewFullBlogs">

@@ -1,0 +1,79 @@
+<div class="m-2">
+  <mat-card>
+    <div>
+      <button mat-raised-button color="primary" class="m-2" (click)="onFindUsers()">Find Users</button>
+      <button mat-raised-button color="primary" class="m-2" (click)="onInbox()">View Inbox</button>
+    </div>
+  </mat-card>
+</div>
+
+<div class="m-2" *ngIf="!boolean_FindUsers">
+  <mat-card>
+    <mat-card-header>
+      <h1>Inbox</h1>
+      <mat-icon class="m-1"> textsms</mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="messages.length === 0">
+        <mat-card >
+          <h4 class="m-2">Inbox is empty.</h4>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="m-2" *ngIf="boolean_FindUsers">
+  <mat-card>
+    <mat-card-header>
+      <h1>Find Users</h1>
+      <mat-icon class="m-1">people</mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="!onMessageBoolean">
+        <div *ngFor="let element of accounts; let i = index" >
+          <mat-card class="m-4">
+            <mat-card-header>
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h2>{{element.name}}</h2>
+                </div>
+              </div>
+            </mat-card-header>
+            <mat-card-content>
+              <div>
+                <h2>{{element.email}}</h2>
+              </div>
+              <button mat-raised-button color="primary" (click)="onMessage(i)">Message</button>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+      <div *ngIf="onMessageBoolean">
+        <mat-card class="m-4">
+          <mat-card-header>
+            <div class="d-flex justify-content-between">
+              <div>
+                <h2>{{otherUser.name}}</h2>
+              </div>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <div>
+              <h2>{{otherUser.email}}</h2>
+            </div>
+              <mat-form-field style="width: 28rem">
+                <input matInput [(ngModel)]="message" name="message" placeholder="message">
+              </mat-form-field>
+            <button mat-raised-button color="primary" class="m-2">Send</button>
+            <button mat-raised-button color="accent" class="m-2">Cancel</button>
+          </mat-card-content>
+        </mat-card>
+
+
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>

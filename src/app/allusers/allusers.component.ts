@@ -39,6 +39,7 @@ export class AllusersComponent implements OnDestroy{
           this.blog = value;
           this.comments = [];
           this.comments = this.blog.commentsLists;
+          this.total_Views = this.blog.view_Counts;
         }
       }
     });
@@ -53,7 +54,7 @@ export class AllusersComponent implements OnDestroy{
     this.allAccounts = temp;
   }
 
-
+  total_Views: number = -1;
   search: string = "";
 
 

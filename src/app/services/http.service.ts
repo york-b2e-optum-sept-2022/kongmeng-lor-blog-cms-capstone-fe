@@ -26,7 +26,6 @@ export class HttpService {
   }
   public getAllBlogs(): Observable<IBlogs[]> {
     return this.httpClient.get("http://localhost:8008/api/blog/get/allblogs") as Observable<IBlogs[]>;
-
   }
   public getAllAccounts(): Observable<IAccount[]> {
     return this.httpClient.get("http://localhost:8008/api/account/getAll") as Observable<IAccount[]>
@@ -37,8 +36,8 @@ export class HttpService {
   public getMessagesById(id: number): Observable<IMessages[]> {
     return this.httpClient.get(`http://localhost:8008/api/account/get/messagesById?id=${id}`) as Observable<IMessages[]>;
   }
-  public updateViews(data: IUpdateViews) {
-    return this.httpClient.post(`http://localhost:8008/api/blog/update/views`, data);
+  public updateViews(data: IUpdateViews): Observable<IBlogs>{
+    return this.httpClient.post(`http://localhost:8008/api/blog/update/views`, data) as Observable<IBlogs>;
   }
   public deleteComment(data: IDeleteComment): Observable<IBlogs> {
     const deleteComment = {
@@ -59,5 +58,10 @@ export class HttpService {
   public editComment(data: IEditComment): Observable<IBlogs> {
     return this.httpClient.put("http://localhost:8008/api/blog/edit/comment",data) as Observable<IBlogs>;
   }
+
+
+
+
+
 
 }

@@ -18,6 +18,7 @@ import {FormsModule} from "@angular/forms";
 import {MatDividerModule} from '@angular/material/divider';
 import { BlogsComponent } from './blogs/blogs.component';
 import { AllusersComponent } from './allusers/allusers.component';
+import { MessageComponent } from './message/message.component';
 
 
 
@@ -28,7 +29,8 @@ import { AllusersComponent } from './allusers/allusers.component';
     AccountComponent,
     MainComponent,
     BlogsComponent,
-    AllusersComponent
+    AllusersComponent,
+    MessageComponent
   ],
   imports: [
     MatToolbarModule,

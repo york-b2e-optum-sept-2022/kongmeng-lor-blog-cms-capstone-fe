@@ -85,7 +85,7 @@ export class AccountService {
   }
   public updateViews(data: IUpdateViews) {
     this.httpService.updateViews(data).pipe(first()).subscribe({
-      next: value => {console.log(value)}, error: err => {console.log(err)}
+      next: value => {this.$current_Blog.next(value)}, error: err => {console.log(err)}
     });
   }
   public deleteComment(data: IDeleteComment) {
