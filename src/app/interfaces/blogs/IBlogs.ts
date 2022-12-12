@@ -7,7 +7,7 @@ export interface IBlogs {
   create_Date: string,
   update_Date: string,
   owner_Email: string,
-  owner_Id: string,
+  owner_Id: number,
   view_Counts: number,
   view_Accounts: number[],
   commentsLists: IComments[]

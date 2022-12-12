@@ -15,9 +15,9 @@
 
   <mat-card class="m-2" style="width: 39rem">
     <mat-card-header>
-      <h1 *ngIf="!viewAllBlogs && !createBlogs">Your Blogs</h1>
-      <h1 *ngIf="!viewAllBlogs && createBlogs">Create Blogs</h1>
-      <h1 *ngIf="viewAllBlogs && !createBlogs">View All Blogs</h1>
+      <h1 *ngIf="!viewAllBlogs && !createBlogs" class="m-2">Your Blogs</h1>
+      <h1 *ngIf="!viewAllBlogs && createBlogs" class="m-2">Create Blogs</h1>
+      <h1 *ngIf="viewAllBlogs && !createBlogs" class="m-2">View All Blogs</h1>
     </mat-card-header>
     <mat-card-content>
       <app-blogs></app-blogs>

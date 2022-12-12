@@ -101,7 +101,7 @@ export class AllusersComponent implements OnDestroy{
     create_Date: "",
     update_Date: "",
     owner_Email: "",
-    owner_Id: "",
+    owner_Id: -1,
     view_Counts: -1,
     view_Accounts: [],
     commentsLists: []

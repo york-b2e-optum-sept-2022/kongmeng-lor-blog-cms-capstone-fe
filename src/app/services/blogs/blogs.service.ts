@@ -11,7 +11,9 @@ import {IPostBlog} from "../../interfaces/blogs/IPostBlog";
 })
 export class BlogsService {
 
-  constructor(private httpService: HttpService, private accountService: AccountService) {}
+  constructor(private httpService: HttpService, private accountService: AccountService) {
+
+  }
   $blogs = new BehaviorSubject<IBlogs[] | null>(null);
   $viewAllBlogs = new BehaviorSubject<boolean>(false);
   $createBlogs = new BehaviorSubject<boolean>(false);
@@ -26,7 +28,9 @@ export class BlogsService {
   }
   public createBlog(data: IPostBlog) {
     this.httpService.createBlog(data).pipe(first()).subscribe({
-      next: value => {console.log(value)}, error: err => {console.log(err)}
+      next: value => {
+        this.getBlogsById(data.owner_Id);
+      }, error: err => {console.log(err)}
     });
   }
   public getBlogsById(id: number) {

@@ -87,10 +87,6 @@ export class MessageComponent implements OnDestroy{
     if (this.reply_Id === -1) {
       this.reply_Id = this.currentId;
     }
-    console.log(this.reply_Id);
-    // const temp = this.accounts.filter(account => account.email === this.current_Message.owner);
-    // console.log(temp);
-    // this.reply_Id = temp[0].id;
     this.booleanReply = true;
   }
   replySaved() {
@@ -112,6 +108,7 @@ export class MessageComponent implements OnDestroy{
   onReturn() {
     this.booleanHistory = false;
     this.booleanReply = false;
+    this.accountService.$error.next("");
   }
   onFilterAccounts() {
     const temp = this.accounts.filter(index => index.id != this.currentId);
@@ -148,6 +145,7 @@ export class MessageComponent implements OnDestroy{
   }
   onCancelSend() {
     this.onMessageBoolean = false;
+    this.accountService.$error.next("");
     this.message = "";
   }
   onSend() {

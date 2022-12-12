@@ -23,6 +23,7 @@ export class BlogsComponent implements OnDestroy{
       next: value => {
         if (value!= null) {
           this.current_Account = value
+          console.log(value)
           this.blogService.getBlogsById(this.current_Account.id);
         }
       }
@@ -30,7 +31,6 @@ export class BlogsComponent implements OnDestroy{
     this.sub3 = this.blogService.$current_Blogs.subscribe({
       next: value => {
         if (value!= null) {
-          console.log(value)
           this.my_Blogs = value;
         }
       }
@@ -102,6 +102,7 @@ export class BlogsComponent implements OnDestroy{
       owner_Id: this.current_Account.id
     }
     this.blogService.createBlog(data);
+    this.blogService.getBlogsById(this.current_Account.id);
     this.onCancel();
   }
 }

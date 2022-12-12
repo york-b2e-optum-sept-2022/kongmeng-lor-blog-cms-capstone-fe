@@ -1,11 +1,11 @@
 <div>
-  <mat-form-field appearance="fill" class="m-1" style="width: 30rem;" *ngIf="booleanViewAll">
+  <mat-form-field appearance="fill" class="m-2" style="width: 30rem;" *ngIf="booleanViewAll">
     <mat-label>search blogs</mat-label>
     <input matInput>
   </mat-form-field>
-  <button mat-raised-button class="m-1" (click)="viewAll()" *ngIf="!booleanViewAll">View All Blogs</button>
-  <button mat-raised-button class="m-1" (click)="viewMyBlogs()" *ngIf="!booleanViewMine">View My Blogs</button>
-  <button mat-raised-button class="m-1" (click)="createBlogs()" *ngIf="!booleanCreateBlogs">Create Blogs</button>
+  <button mat-raised-button class="m-2" (click)="viewAll()" *ngIf="!booleanViewAll" c="">View All Blogs</button>
+  <button mat-raised-button class="m-2" (click)="viewMyBlogs()" *ngIf="!booleanViewMine">View My Blogs</button>
+  <button mat-raised-button class="m-2" (click)="createBlogs()" *ngIf="!booleanCreateBlogs">Create Blogs</button>
 </div>
 
 <div *ngIf="!booleanViewAll && !booleanCreateBlogs ">
@@ -17,7 +17,7 @@
     </mat-card>
   </div>
   <div *ngIf="current_Account.blogEntities.length != 0">
-    <div *ngFor="let element of my_Blogs">
+    <div *ngFor="let element of my_Blogs; let i = index">
       <mat-card class="m-2">
         <mat-card-header>
           <div>
@@ -26,17 +26,22 @@
         </mat-card-header>
         <mat-card-content>
           <div>
-            <h5>{{element.body}}</h5>
+            <h2>{{element.body}}</h2>
           </div>
-        </mat-card-content>
-        <mat-card-content>
-          <button mat-raised-button>Comment</button>
-        </mat-card-content>
-        <mat-card-footer class="d-flex justify-content-end">
           <div>
             <h4 class="m-1">Owner: {{element.owner_Email}}</h4>
-            <h5 class="m-1">Create Date: {{element.create_Date}}</h5>
+            <div class="d-flex">
+              <h5 class="m-1">Create Date: {{element.create_Date}}</h5>
+              <h5 class="m-1">Update Date: {{element.update_Date}}</h5>
+            </div>
           </div>
+        </mat-card-content>
+        <mat-card-footer class="d-flex justify-content-end">
+          <mat-card-content>
+            <button mat-raised-button class="m-2" color="primary">Edit</button>
+            <button mat-raised-button class="m-2">Comment</button>
+            <button mat-raised-button color="warn" class="m-2">Delete</button>
+          </mat-card-content>
         </mat-card-footer>
       </mat-card>
     </div>
@@ -64,7 +69,7 @@
 
 <div *ngIf="booleanViewAll">
   <div *ngFor="let element of allBlogs; let i = index" class="flex-wrap m-2">
-    <mat-card>
+    <mat-card class="m-2">
       <mat-card-header>
         <div>
           <h2>Title: {{element.title}}</h2>
@@ -76,13 +81,23 @@
         </div>
       </mat-card-content>
       <mat-card-content>
-        <button mat-raised-button>Comment</button>
-      </mat-card-content>
-      <mat-card-footer class="d-flex justify-content-end">
+        <div>
+          <h2>{{element.body}}</h2>
+        </div>
         <div>
           <h4 class="m-1">Owner: {{element.owner_Email}}</h4>
-          <h5 class="m-1">Create Date: {{element.create_Date}}</h5>
+          <div class="d-flex">
+            <h5 class="m-1">Create Date: {{element.create_Date}}</h5>
+            <h5 class="m-1">Update Date: {{element.update_Date}}</h5>
+          </div>
         </div>
+      </mat-card-content>
+      <mat-card-footer class="m-2 d-flex justify-content-end">
+        <mat-card-content>
+          <button mat-raised-button class="m-2">Comments</button>
+          <button mat-raised-button class="m-2" color="primary" *ngIf="element.owner_Id === current_Account.id">Edit</button>
+          <button mat-raised-button class="m-2" color="warn" *ngIf="element.owner_Id === current_Account.id">Delete</button>
+        </mat-card-content>
       </mat-card-footer>
     </mat-card>
   </div>
