@@ -16,8 +16,6 @@ export class AccountComponent implements OnDestroy{
     });
   }
   sub1: Subscription;
-
-
   signUp: boolean = false;
   error: string = "";
   name: string = "";
@@ -28,6 +26,7 @@ export class AccountComponent implements OnDestroy{
   onSignUp() {
     this.signUp = true;
     this.clearVariables();
+    this.accountService.$error.next("");
   }
   onCreate() {
     if (this.email == "" || this.password == "" || this.name == "" || this.confirm_Password == "") {
@@ -47,7 +46,6 @@ export class AccountComponent implements OnDestroy{
     this.clearVariables();
     this.signUp = false;
   }
-
   onLogin() {
     const data: ILogIn = {
       email: this.email,
@@ -56,20 +54,16 @@ export class AccountComponent implements OnDestroy{
     this.accountService.logIn(data);
     this.accountService.$error.next("");
   }
-
-
   onCancel() {
     this.clearVariables();
     this.signUp = false;
   }
-
   clearVariables() {
     this.name = "";
     this.email = "";
     this.password = "";
+    this.confirm_Password = "";
   }
-
-
   ngOnDestroy() {
     this.sub1.unsubscribe();
   }

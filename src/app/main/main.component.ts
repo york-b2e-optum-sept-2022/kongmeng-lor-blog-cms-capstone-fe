@@ -60,12 +60,9 @@ export class MainComponent implements OnDestroy{
     blogEntities: []
   }
 
-
   onLogOut() {
     this.accountService.$logIn.next(false);
   }
-
-
 
   ngOnDestroy() {
     this.sub1.unsubscribe();

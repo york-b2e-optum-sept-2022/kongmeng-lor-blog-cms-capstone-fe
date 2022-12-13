@@ -11,13 +11,14 @@ import {IUpdateViews} from "../../interfaces/blogs/IUpdateViews";
 import {IDeleteComment} from "../../interfaces/blogs/IDeleteComment";
 import {IAddComment} from "../../interfaces/blogs/IAddComment";
 import {IEditComment} from "../../interfaces/blogs/IEditComment";
+import {BlogsService} from "../blogs/blogs.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService, private blogService: BlogsService) {}
 
   $current_Account = new BehaviorSubject<IAccount | null>(null);
   $allAccounts = new BehaviorSubject<IAccount[] | null>(null);
@@ -58,7 +59,7 @@ export class AccountService {
     })
   }
   public getAllAccounts() {
-    this.httpService.getAllAccounts().subscribe({
+    this.httpService.getAllAccounts().pipe(first()).subscribe({
       next: value => {this.$allAccounts.next(value)}, error: err => {console.log(err)}
     });
   }
@@ -71,7 +72,7 @@ export class AccountService {
     })
   }
   public getAllMessagesById(id: number) {
-    this.httpService.getMessagesById(id).subscribe({
+    this.httpService.getMessagesById(id).pipe(first()).subscribe({
       next: value => {this.$messages.next(value)}, error: err => {console.log(err)}
     })
   }
@@ -81,14 +82,17 @@ export class AccountService {
     });
   }
   public deleteComment(data: IDeleteComment) {
-    this.httpService.deleteComment(data).subscribe({
+    this.httpService.deleteComment(data).pipe(first()).subscribe({
       next: value => {
         this.$current_Blog.next(value)}, error: err => {console.log(err)}
     });
   }
   public addComment(data: IAddComment) {
-    this.httpService.addComment(data).subscribe({
-      next: value => {this.$current_Blog.next(value)}, error: err => {console.log(err)}
+    this.httpService.addComment(data).pipe(first()).subscribe({
+      next: value => {
+        this.$current_Blog.next(value)
+        this.blogService.getAllBlogs();
+      }, error: err => {console.log(err)}
     });
   }
   public editComment(data: IEditComment) {

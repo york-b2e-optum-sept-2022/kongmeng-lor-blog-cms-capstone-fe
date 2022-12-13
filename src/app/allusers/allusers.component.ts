@@ -58,10 +58,8 @@ export class AllusersComponent implements OnDestroy{
     );
     this.displayAccounts = temp;
   }
-
   total_Views: number = -1;
   search: string = "";
-
 
   sub1: Subscription;
   sub2: Subscription;
@@ -69,13 +67,11 @@ export class AllusersComponent implements OnDestroy{
   sub4: Subscription;
 
   error: string = "";
-
   allAccounts: IAccount[] = [];
   boolean_Send: boolean = false;
   currentId: number = -1;
   sender_Id: number = -1;
   message: string = "";
-
   otherUser: IAccount = {
     name: "",
     id: -1,
@@ -83,7 +79,6 @@ export class AllusersComponent implements OnDestroy{
     messageEntities: [],
     blogEntities: []
   }
-
   onSend(i: number) {
     this.boolean_Send = true;
     this.otherUser = this.displayAccounts[i];
@@ -97,7 +92,6 @@ export class AllusersComponent implements OnDestroy{
 
   }
   boolean_Blogs: boolean = false;
-
   onViewBlogs(i: number) {
     this.otherUser = this.displayAccounts[i];
     this.boolean_Blogs = true;
@@ -131,7 +125,6 @@ export class AllusersComponent implements OnDestroy{
     }
     this.accountService.updateViews(temp);
   }
-
   onDeleteComment(i: number) {
     this.comments = [];
 
@@ -148,12 +141,8 @@ export class AllusersComponent implements OnDestroy{
           this.blog = value;
       }
     });
-
   }
-
-
   comment_String: string = "";
-
   onAddComment() {
     if (this.comment_String === "") {
       this.accountService.$error.next("Can not add empty comment. Please add something.");
@@ -168,11 +157,12 @@ export class AllusersComponent implements OnDestroy{
     this.accountService.addComment(data);
     this.comment_String = "";
   }
-
   ngOnDestroy() {
     this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
+    this.sub3.unsubscribe();
+    this.sub4.unsubscribe();
   }
-
   onSendMessage() {
     this.sender_Id = this.otherUser.id;
     if (this.message=="") {

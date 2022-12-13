@@ -6,7 +6,6 @@ import {BlogsService} from "../services/blogs/blogs.service";
 import {IAccount} from "../interfaces/IAccount";
 import {IPostBlog} from "../interfaces/blogs/IPostBlog";
 import {IDeleteBlog} from "../interfaces/blogs/IDeleteBlog";
-import {IComments} from "../interfaces/blogs/IComments";
 import {IEditBlogs} from "../interfaces/blogs/IEditBlogs";
 import {IAddComment} from "../interfaces/blogs/IAddComment";
 import {IDeleteComment} from "../interfaces/blogs/IDeleteComment";
@@ -22,13 +21,13 @@ export class BlogsComponent implements OnDestroy{
     this.sub1 = this.blogService.$blogs.subscribe({
       next: value => {if (value != null) {
         this.allBlogs = value;
+        this.displayAllBlogs = this.allBlogs.sort(function (a,b) { return b.id - a.id});
       }}
     });
     this.sub2 = this.accountService.$current_Account.subscribe({
       next: value => {
         if (value!= null) {
-          this.current_Account = value
-          console.log(value)
+          this.current_Account = value;
           this.blogService.getBlogsById(this.current_Account.id);
         }
       }
@@ -37,6 +36,7 @@ export class BlogsComponent implements OnDestroy{
       next: value => {
         if (value!= null) {
           this.my_Blogs = value;
+          this.current_Account.blogEntities = this.my_Blogs;
         }
       }
     });
@@ -50,8 +50,14 @@ export class BlogsComponent implements OnDestroy{
     })
 
   }
+  searchAllBlogs: string = "";
+  filterAllBlogs(searchAllBlogs: string) {
+    this.displayAllBlogs = this.allBlogs.filter((word) => {
+      return word.title.includes(searchAllBlogs) || word.owner_Email.includes(searchAllBlogs)
+    });
+  }
 
-
+  displayAllBlogs: IBlogs[] = [];
   allBlogs: IBlogs[] = [];
   my_Blogs: IBlogs[] = [];
   sub1: Subscription;
@@ -100,6 +106,9 @@ export class BlogsComponent implements OnDestroy{
   }
   ngOnDestroy() {
     this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
+    this.sub3.unsubscribe();
+    this.sub4.unsubscribe();
   }
   onCancel() {
     this.booleanViewAll = false;
@@ -116,13 +125,12 @@ export class BlogsComponent implements OnDestroy{
     const data: IPostBlog = {
       title: this.title,
       body: this.body,
-      create_Date: "12-12-2022",
-      update_Date: "12-12-2022",
       owner_Email: this.current_Account.email,
       owner_Id: this.current_Account.id
     }
     this.blogService.createBlog(data);
     this.blogService.getBlogsById(this.current_Account.id);
+    this.blogService.getAllBlogs();
     this.onCancel();
   }
   blogId: number = -1;
@@ -218,7 +226,9 @@ export class BlogsComponent implements OnDestroy{
           this.blog.commentsLists = this.blog.commentsLists.sort(function (a,b) { return b.id - a.id});
       }
     });
+
   }
+
   num: number = 0;
   booleanCommentsView: boolean = false;
   viewAllComments() {

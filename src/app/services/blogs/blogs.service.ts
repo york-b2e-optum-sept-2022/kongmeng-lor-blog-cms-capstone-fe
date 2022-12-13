@@ -13,9 +13,7 @@ import {IEditBlogs} from "../../interfaces/blogs/IEditBlogs";
 })
 export class BlogsService {
 
-  constructor(private httpService: HttpService, private accountService: AccountService) {
-
-  }
+  constructor(private httpService: HttpService) {}
   $blogs = new BehaviorSubject<IBlogs[] | null>(null);
   $viewAllBlogs = new BehaviorSubject<boolean>(false);
   $createBlogs = new BehaviorSubject<boolean>(false);
@@ -32,6 +30,7 @@ export class BlogsService {
     this.httpService.createBlog(data).pipe(first()).subscribe({
       next: value => {
         this.getBlogsById(data.owner_Id);
+        this.getAllBlogs();
       }, error: err => {console.log(err)}
     });
   }
@@ -42,7 +41,10 @@ export class BlogsService {
   }
   public deleteBlog(data: IDeleteBlog) {
     this.httpService.deleteBlog(data).pipe(first()).subscribe({
-      next: value => {this.$current_Blogs.next(value)}, error: err => {console.log(err)}
+      next: value => {
+        this.$current_Blogs.next(value)
+        this.getAllBlogs();
+      }, error: err => {console.log(err)}
     })
   }
   public editBlog(data: IEditBlogs, id: number) {

@@ -1,7 +1,7 @@
 <div>
   <mat-form-field appearance="fill" class="m-2" style="width: 30rem;" *ngIf="booleanViewAll">
-    <mat-label>search blogs</mat-label>
-    <input matInput>
+    <mat-label >search blogs</mat-label>
+    <input matInput [ngModel]="searchAllBlogs" (ngModelChange)="filterAllBlogs($event)">
   </mat-form-field>
   <button mat-raised-button class="m-2" (click)="viewAll()" *ngIf="!booleanViewAll" c="">View All Blogs</button>
   <button mat-raised-button class="m-2" (click)="viewMyBlogs()" *ngIf="!booleanViewMine">View My Blogs</button>
@@ -179,7 +179,7 @@
 </div>
 
 <div *ngIf="booleanViewAll">
-  <div *ngFor="let element of allBlogs; let i = index" class="flex-wrap m-2">
+  <div *ngFor="let element of displayAllBlogs; let i = index" class="flex-wrap m-2">
     <mat-card class="m-2">
       <mat-card-header>
         <div>
