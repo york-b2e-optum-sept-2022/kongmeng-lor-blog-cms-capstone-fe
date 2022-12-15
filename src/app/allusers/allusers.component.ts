@@ -72,6 +72,7 @@ export class AllusersComponent implements OnDestroy{
   currentId: number = -1;
   sender_Id: number = -1;
   message: string = "";
+
   otherUser: IAccount = {
     name: "",
     id: -1,
@@ -127,14 +128,12 @@ export class AllusersComponent implements OnDestroy{
   }
   onDeleteComment(i: number) {
     this.comments = [];
-
     const data: IDeleteComment = {
       Id: this.blog.id,
       index: i,
       user_Id: this.currentId
     }
     this.accountService.deleteComment(data);
-
     this.accountService.$current_Blog.subscribe({
       next: value => {
         if (value!=null)
@@ -142,13 +141,10 @@ export class AllusersComponent implements OnDestroy{
       }
     });
   }
+
   comment_String: string = "";
   onAddComment() {
-    if (this.comment_String === "") {
-      this.accountService.$error.next("Can not add empty comment. Please add something.");
-      return;
-    }
-    this.accountService.$error.next("");
+    this.errorFunction(this.comment_String,"Can not add empty comment. Please add something.");
     const data: IAddComment = {
       Id: this.blog.id,
       user_Id: this.currentId,
@@ -163,13 +159,16 @@ export class AllusersComponent implements OnDestroy{
     this.sub3.unsubscribe();
     this.sub4.unsubscribe();
   }
-  onSendMessage() {
-    this.sender_Id = this.otherUser.id;
-    if (this.message=="") {
-      this.accountService.$error.next("Can not send an empty message. Please enter a message.");
+  errorFunction(input: string, message: string) {
+    if (input=="") {
+      this.accountService.$error.next(message);
       return;
     }
     this.accountService.$error.next("");
+  }
+  onSendMessage() {
+    this.sender_Id = this.otherUser.id;
+    this.errorFunction(this.message,"Can not send an empty message. Please enter a message.");
     const message: IMessageSend = {
       current_Id: this.currentId,
       message: this.message,
@@ -197,11 +196,7 @@ export class AllusersComponent implements OnDestroy{
     this.boolean_Comment = true;
   }
   onSaveComment() {
-    if (this.edit_Comment === "") {
-      this.accountService.$error.next("Cannot save empty string. Please try again.");
-      return;
-    }
-    this.accountService.$error.next("");
+    this.errorFunction(this.edit_Comment,"Cannot save empty string. Please try again.");
     const data: IEditComment = {
       id: this.blog.id,
       index: this.comment_Index,

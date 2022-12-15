@@ -48,8 +48,8 @@ export class BlogsComponent implements OnDestroy{
         }
        }
     })
-
   }
+
   searchAllBlogs: string = "";
   filterAllBlogs(searchAllBlogs: string) {
     this.displayAllBlogs = this.allBlogs.filter((word) => {
@@ -72,8 +72,6 @@ export class BlogsComponent implements OnDestroy{
     messageEntities: [],
     blogEntities: []
   }
-
-
   booleanViewAll: boolean = false;
   viewAll() {
     this.booleanViewAll = true;
@@ -226,9 +224,7 @@ export class BlogsComponent implements OnDestroy{
           this.blog.commentsLists = this.blog.commentsLists.sort(function (a,b) { return b.id - a.id});
       }
     });
-
   }
-
   num: number = 0;
   booleanCommentsView: boolean = false;
   viewAllComments() {
