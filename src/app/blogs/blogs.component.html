@@ -1,16 +1,16 @@
 <div>
-  <mat-form-field appearance="fill" class="m-2" style="width: 30rem;" *ngIf="booleanViewAll">
+  <mat-form-field appearance="fill" class="m-2" style="width: 40rem;" *ngIf="booleanViewAll">
     <mat-label >search blogs</mat-label>
     <input matInput [ngModel]="searchAllBlogs" (ngModelChange)="filterAllBlogs($event)">
   </mat-form-field>
-  <button mat-raised-button class="m-2" (click)="viewAll()" *ngIf="!booleanViewAll" c="">View All Blogs</button>
-  <button mat-raised-button class="m-2" (click)="viewMyBlogs()" *ngIf="!booleanViewMine">View My Blogs</button>
-  <button mat-raised-button class="m-2" (click)="createBlogs()" *ngIf="!booleanCreateBlogs">Create Blogs</button>
+      <button mat-raised-button class="m-2" color="primary" (click)="viewAll()" *ngIf="!booleanViewAll" c="">View All Blogs</button>
+      <button mat-raised-button class="m-2" color="accent" (click)="viewMyBlogs()" *ngIf="!booleanViewMine">View My Blogs</button>
+      <button mat-raised-button class="m-2" color="warn" (click)="createBlogs()" *ngIf="!booleanCreateBlogs">Create Blogs</button>
 </div>
 
 <div *ngIf="!booleanViewAll && !booleanCreateBlogs ">
   <div>
-    <mat-card class="m-2">
+    <mat-card class="m-3">
       <mat-card-header *ngIf="current_Account.blogEntities.length === 0">
         <h2>You do not have any blogs. Create it first!</h2>
       </mat-card-header>
@@ -19,7 +19,7 @@
 
   <div *ngIf="current_Account.blogEntities.length != 0 && !booleanEdit && !booleanView2">
     <div *ngFor="let element of my_Blogs; let i = index">
-      <mat-card class="m-2">
+      <mat-card class="m-3">
         <mat-card-header>
           <div>
             <h2>Title: {{element.title}}</h2>

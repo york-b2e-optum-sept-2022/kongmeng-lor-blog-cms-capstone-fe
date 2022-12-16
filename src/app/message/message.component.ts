@@ -76,9 +76,9 @@ export class MessageComponent implements OnDestroy{
   reply_Id: number = -1;
   onReply(i: number) {
     this.current_Message = this.messages[i];
-    console.log(this.current_Message);
+
     for (let i = 0; i < this.accounts.length; i++) {
-      if (this.accounts[i].email === this.current_Message.owner) {
+      if (this.accounts[i].email === this.current_Message.email_From) {
         this.reply_Id = this.accounts[i].id;
         console.log(this.reply_Id);
       }
@@ -102,7 +102,6 @@ export class MessageComponent implements OnDestroy{
     this.accountService.sendMessage(message);
     this.message = "";
     this.booleanReply = false;
-    console.log(this.messages.length);
   }
 
   onReturn() {

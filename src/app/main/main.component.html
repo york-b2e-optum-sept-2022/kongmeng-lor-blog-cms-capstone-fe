@@ -1,5 +1,6 @@
+
 <div>
-  <mat-toolbar color="primary" class="d-flex justify-content-between">
+  <mat-toolbar class="d-flex justify-content-between" color="primary">
     <div>
       <h1 class="m-2">Welcome {{current_Account.name}}</h1>
     </div>
@@ -10,10 +11,9 @@
 </div>
 
 
+<div class="d-flex flex-wrap">
 
-<div class="d-flex justify-content-between flex-wrap">
-
-  <mat-card class="m-2" style="width: 39rem">
+  <mat-card class="m-1" style="width: 50rem;background-color: darkgrey">
     <mat-card-header>
       <h1 *ngIf="!viewAllBlogs && !createBlogs" class="m-2">Your Blogs</h1>
       <h1 *ngIf="!viewAllBlogs && createBlogs" class="m-2">Create Blogs</h1>
@@ -24,8 +24,21 @@
     </mat-card-content>
   </mat-card>
 
+  <mat-card class="m-1" style="width: 43rem;background-color: darkgrey">
+    <mat-card-header *ngIf="!viewFullBlogs">
+      <h1>Accounts</h1>
+      <mat-icon class="m-1">supervised_user_circle</mat-icon>
+    </mat-card-header>
+    <mat-card-header *ngIf="viewFullBlogs">
+      <h1>Blogs</h1>
+      <mat-icon class="m-1">subject</mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+      <app-allusers></app-allusers>
+    </mat-card-content>
+  </mat-card>
 
-  <mat-card class="m-2" style="width: 39rem">
+  <mat-card class="m-2" style="width: 32rem; background-color: lightblue">
     <mat-card-header>
       <h1>Message</h1>
       <mat-icon> message</mat-icon>
@@ -34,22 +47,6 @@
       <app-message></app-message>
     </mat-card-content>
   </mat-card>
-
-
-
-
-
-  <mat-card class="m-2" style="width: 39rem">
-    <mat-card-header *ngIf="!viewFullBlogs">
-      <h1>Users</h1>
-      <mat-icon class="m-1">supervised_user_circle</mat-icon>
-    </mat-card-header>
-    <mat-card-header *ngIf="viewFullBlogs">
-      <h1>Viewing Other Blogs</h1>
-      <mat-icon class="m-1">subject</mat-icon>
-    </mat-card-header>
-    <mat-card-content>
-      <app-allusers></app-allusers>
-    </mat-card-content>
-  </mat-card>
 </div>
+
+

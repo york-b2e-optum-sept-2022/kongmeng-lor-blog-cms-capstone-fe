@@ -7,13 +7,11 @@
 
 <div *ngIf="!boolean_Send && !boolean_Blogs">
   <div *ngFor="let element of displayAccounts; let i = index" >
-    <mat-card class="m-2" >
-      <mat-card-header>
-        <div>
-          <h2>Name: {{element.name}}</h2>
-          <h2>Email: {{element.email}}</h2>
+    <mat-card class="m-3">
+        <div class="d-flex m-2">
+          <mat-icon class="m-2">account_circle</mat-icon>
+          <h2 class="m-1"> {{element.name}}</h2>
         </div>
-      </mat-card-header>
       <mat-card-content>
         <div>
           <button mat-raised-button color="primary" class="m-2" (click)="onSend(i)" *ngIf="!boolean_Send">Send a message</button>
@@ -27,19 +25,18 @@
 <div *ngIf="boolean_Blogs">
   <div>
     <mat-card>
-      <mat-card-header>
-          <div>
-            <h3 class="m-1">Name: {{otherUser.name}}</h3>
-            <h3 class="m-1">Email: {{otherUser.email}}</h3>
-          </div>
-          <div class="m-4" *ngIf="!boolean_ViewMore">
-            <button mat-raised-button color="warn" (click)="onCancel()">Return</button>
-          </div>
-          <div class="m-4"  *ngIf="boolean_ViewMore">
-            <button mat-raised-button color="warn" (click)="onBackMain()">Return</button>
-          </div>
-      </mat-card-header>
-
+      <div class="m-2 d-flex justify-content-between" >
+        <div>
+          <h3 class="m-1">Name: {{otherUser.name}}</h3>
+          <h3 class="m-1">Email: {{otherUser.email}}</h3>
+        </div>
+        <div class="m-4" *ngIf="!boolean_ViewMore">
+          <button mat-raised-button color="warn" (click)="onCancel()">Return</button>
+        </div>
+        <div class="m-4"  *ngIf="boolean_ViewMore">
+          <button mat-raised-button color="warn" (click)="onBackMain()">Return</button>
+        </div>
+      </div>
       <mat-card-content>
 
         <div *ngIf="!boolean_ViewMore">
@@ -60,38 +57,27 @@
 
 
         <div *ngIf="boolean_ViewMore">
-          <mat-card class="m-2">
+          <mat-card class="m-2" style="background-color: bisque">
             <div>
-              <mat-card-header>
-                <div>
-                  <h1>{{blog.title}}</h1>
-                  <p>Author: {{blog.owner_Email}}</p>
-                </div>
-              </mat-card-header>
-              <mat-card-content>
-                <mat-card class="m-2">
-                  <h3 class="m-2">{{blog.body}}</h3>
-                </mat-card>
-
-                <mat-card class="m-2">
-                  <div class="d-flex justify-content-between">
-                    <div class="m-2">
-                      Update: {{blog.create_Date}}
+                  <mat-card class="m-4">
+                    <div class="m-2 d-flex justify-content-between">
+                      <h1>Title: {{blog.title}}</h1>
+                      <p class="m-2">Author: {{blog.owner_Email}}</p>
                     </div>
-                    <div class="m-2">
-                      Created: {{blog.create_Date}}
-                    </div>
-                  </div>
-                </mat-card>
-
-                <mat-card class="m-2">
+                  <h3 class="m-2">Body: {{blog.body}}</h3>
                   <h3 class="m-2">Total Views: {{blog.view_Counts}}</h3>
-                </mat-card>
-                <mat-card class="m-2">
                   <h3 class="m-2">Total Comments: {{blog.commentsLists.length}}</h3>
+                    <div class="d-flex justify-content-between">
+                      <div class="m-4">
+                        Update: {{blog.create_Date}}
+                      </div>
+                      <div class="m-4">
+                        Created: {{blog.create_Date}}
+                      </div>
+                    </div>
                 </mat-card>
 
-              </mat-card-content>
+
               <mat-card-header>
                 <div>
                   <h1>Comments</h1>
@@ -107,6 +93,7 @@
                       <input matInput [(ngModel)]="comment_String" name="comment">
                     </mat-form-field>
                     <button mat-raised-button color="primary" (click)="onAddComment()" class="m-2" >Add Comment</button>
+                    <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
                   </div>
                 </mat-card-content>
 
@@ -126,6 +113,8 @@
                       </mat-card>
                     </div>
                   </div>
+
+
                   <div *ngIf="boolean_Comment" class="m-2">
                     <mat-card class="m-2">
                       <div class="m-2 d-flex justify-content-between">

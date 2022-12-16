@@ -126,25 +126,26 @@ export class AllusersComponent implements OnDestroy{
     }
     this.accountService.updateViews(temp);
   }
+
   onDeleteComment(i: number) {
+
+    let index: number = Math.abs(i- (this.blog.commentsLists.length - 1));
+
     this.comments = [];
     const data: IDeleteComment = {
       Id: this.blog.id,
-      index: i,
+      index: index,
       user_Id: this.currentId
     }
     this.accountService.deleteComment(data);
-    this.accountService.$current_Blog.subscribe({
-      next: value => {
-        if (value!=null)
-          this.blog = value;
-      }
-    });
   }
 
   comment_String: string = "";
   onAddComment() {
-    this.errorFunction(this.comment_String,"Can not add empty comment. Please add something.");
+    if (this.comment_String === "") {
+      this.errorFunction(this.comment_String,"Can not add empty comment. Please add something.");
+      return;
+    }
     const data: IAddComment = {
       Id: this.blog.id,
       user_Id: this.currentId,
@@ -153,6 +154,9 @@ export class AllusersComponent implements OnDestroy{
     this.accountService.addComment(data);
     this.comment_String = "";
   }
+  onClear() {
+    this.comment_String= "";
+  }
   ngOnDestroy() {
     this.sub1.unsubscribe();
     this.sub2.unsubscribe();
@@ -160,7 +164,7 @@ export class AllusersComponent implements OnDestroy{
     this.sub4.unsubscribe();
   }
   errorFunction(input: string, message: string) {
-    if (input=="") {
+    if (input==="") {
       this.accountService.$error.next(message);
       return;
     }

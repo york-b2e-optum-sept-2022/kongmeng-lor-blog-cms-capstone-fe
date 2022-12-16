@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "../http/http.service";
 import {ICreateAccount} from "../../interfaces/create/ICreateAccount";
-import {BehaviorSubject, connect, first, Subscription} from "rxjs";
+import {BehaviorSubject, first} from "rxjs";
 import {ILogIn} from "../../interfaces/create/ILogIn";
 import {IAccount} from "../../interfaces/IAccount";
 import {IBlogs} from "../../interfaces/blogs/IBlogs";
@@ -41,7 +41,7 @@ export class AccountService {
 
   public createAccount(data: ICreateAccount) {
     this.httpService.createAccount(data).pipe(first()).subscribe({
-      next: data => {console.log(data)}, error: err => {console.log(err)}
+      next: data => {}, error: err => {console.log(err)}
     });
   }
   public logIn(data: ILogIn) {
@@ -78,13 +78,17 @@ export class AccountService {
   }
   public updateViews(data: IUpdateViews) {
     this.httpService.updateViews(data).pipe(first()).subscribe({
-      next: value => {this.$current_Blog.next(value)}, error: err => {console.log(err)}
+      next: value => {
+        this.$current_Blog.next(value);
+        this.blogService.getAllBlogs();
+      }, error: err => {console.log(err)}
     });
   }
   public deleteComment(data: IDeleteComment) {
     this.httpService.deleteComment(data).pipe(first()).subscribe({
       next: value => {
-        this.$current_Blog.next(value)}, error: err => {console.log(err)}
+        this.$current_Blog.next(value)
+      }, error: err => {console.log(err)}
     });
   }
   public addComment(data: IAddComment) {
