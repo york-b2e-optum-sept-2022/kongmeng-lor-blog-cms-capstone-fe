@@ -14,8 +14,14 @@ export class AccountComponent implements OnDestroy{
     this.sub1 = this.accountService.$error.subscribe({
       next: value => {this.error = value}
     });
+    this.sub2 = this.accountService.$signUp.subscribe({
+      next: value => {this.signUp = value}
+    });
+    console.log(this.signUp);
   }
   sub1: Subscription;
+  sub2: Subscription;
+
   signUp: boolean = false;
   error: string = "";
   name: string = "";
@@ -24,7 +30,7 @@ export class AccountComponent implements OnDestroy{
   confirm_Password: string = "";
 
   onSignUp() {
-    this.signUp = true;
+    this.accountService.$signUp.next(true);
     this.clearVariables();
     this.accountService.$error.next("");
   }
@@ -34,7 +40,6 @@ export class AccountComponent implements OnDestroy{
       return;
     }
     this.accountService.$error.next("");
-
     const data: ICreateAccount = {
       email: this.email,
       password: this.password,
@@ -44,7 +49,6 @@ export class AccountComponent implements OnDestroy{
     }
     this.accountService.createAccount(data);
     this.clearVariables();
-    this.signUp = false;
   }
   onLogin() {
     const data: ILogIn = {

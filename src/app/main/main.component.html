@@ -1,11 +1,11 @@
 
 <div>
-  <mat-toolbar class="d-flex justify-content-between" color="primary">
+  <mat-toolbar class="d-flex justify-content-between" style="background-color: lightblue">
     <div>
       <h1 class="m-2">Welcome {{current_Account.name}}</h1>
     </div>
     <div>
-      <button mat-raised-button class="m-2" (click)="onLogOut()">Log Out</button>
+      <button mat-raised-button class="m-2" (click)="onLogOut()" color="warn">Log Out</button>
     </div>
   </mat-toolbar>
 </div>
@@ -13,7 +13,7 @@
 
 <div class="d-flex flex-wrap">
 
-  <mat-card class="m-1" style="width: 50rem;background-color: darkgrey">
+  <mat-card class="m-2" style="width: 50rem;background-color: lightblue">
     <mat-card-header>
       <h1 *ngIf="!viewAllBlogs && !createBlogs" class="m-2">Your Blogs</h1>
       <h1 *ngIf="!viewAllBlogs && createBlogs" class="m-2">Create Blogs</h1>
@@ -24,7 +24,7 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="m-1" style="width: 43rem;background-color: darkgrey">
+  <mat-card class="m-2" style="width: 43rem;background-color: lightblue">
     <mat-card-header *ngIf="!viewFullBlogs">
       <h1>Accounts</h1>
       <mat-icon class="m-1">supervised_user_circle</mat-icon>

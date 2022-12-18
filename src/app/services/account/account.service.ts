@@ -28,6 +28,7 @@ export class AccountService {
   $messages = new BehaviorSubject<IMessages[] | null>(null);
   $boolean_Full_Blogs = new BehaviorSubject<boolean>(false);
   $current_Blog = new BehaviorSubject<IBlogs | null>(null);
+  $signUp = new BehaviorSubject<boolean>(false);
 
 
   message: IMessages = {
@@ -41,7 +42,13 @@ export class AccountService {
 
   public createAccount(data: ICreateAccount) {
     this.httpService.createAccount(data).pipe(first()).subscribe({
-      next: data => {}, error: err => {console.log(err)}
+      next: data => {this.$signUp.next(false);}, error: err => {
+        if (err.status === 403) {
+          this.$signUp.next(true);
+          this.$error.next("Please choose another email address. This email is already taken.");
+          return;
+        }
+      }
     });
   }
   public logIn(data: ILogIn) {
