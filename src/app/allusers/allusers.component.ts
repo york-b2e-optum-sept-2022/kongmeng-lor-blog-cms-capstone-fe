@@ -9,6 +9,7 @@ import {IUpdateViews} from "../interfaces/blogs/IUpdateViews";
 import {IDeleteComment} from "../interfaces/blogs/IDeleteComment";
 import {IAddComment} from "../interfaces/blogs/IAddComment";
 import {IEditComment} from "../interfaces/blogs/IEditComment";
+import {BlogsService} from "../services/blogs/blogs.service";
 
 @Component({
   selector: 'app-allusers',
@@ -16,7 +17,7 @@ import {IEditComment} from "../interfaces/blogs/IEditComment";
   styleUrls: ['./allusers.component.css']
 })
 export class AllusersComponent implements OnDestroy{
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private blogService: BlogsService) {
     this.accountService.getAllAccounts();
     this.sub1 = this.accountService.$allAccounts.subscribe({
       next: value => {if (value!= null) {
@@ -90,7 +91,7 @@ export class AllusersComponent implements OnDestroy{
     this.boolean_Blogs = false;
     this.search = "";
     this.onFilterSearchAccounts(this.search);
-
+    this.accountService.$boolean_Full_Blogs.next(false);
   }
   boolean_Blogs: boolean = false;
   onViewBlogs(i: number) {

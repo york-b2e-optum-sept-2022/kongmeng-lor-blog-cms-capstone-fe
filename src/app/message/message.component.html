@@ -1,10 +1,8 @@
 <div class="m-2">
-  <mat-card style="background-color: lightgoldenrodyellow">
-    <div >
+    <div class="d-flex justify-content-center">
       <button mat-raised-button color="primary" class="m-2" (click)="onFindUsers()">Find Users</button>
       <button mat-raised-button color="primary" class="m-2" (click)="onInbox()">View Inbox</button>
     </div>
-  </mat-card>
 </div>
 
 <div class="m-2" *ngIf="!boolean_FindUsers">
@@ -25,21 +23,22 @@
           <div *ngFor="let element of messages; let i  = index">
             <mat-card class="m-2">
               <mat-card-header>
-                <mat-icon class="m-2">alternate_email</mat-icon>
-                <h1 class="m-1">{{element.owner}}</h1>
+                <div>
+                  <h3>From: {{element.owner_From_Name}}</h3>
+                  <h5>Email: {{element.email_From}}</h5>
+                  <mat-divider></mat-divider>
+                  <h3>To: {{element.owner_To_Name}}</h3>
+                  <h5>Email: {{element.email_To}}</h5>
+                </div>
               </mat-card-header>
               <mat-card-content>
                 <mat-card>
-                  <mat-card-header>
-                    <div>
-                      <h4>From: {{element.email_From}}</h4>
-                      <h4>To: {{element.email_To}}</h4>
-                    </div>
-                  </mat-card-header>
                   <mat-card-content>
                     <h4>Message: {{element.current_Message}}</h4>
-                    <button mat-raised-button color="primary" class="m-2" (click)="onHistory(i)">History</button>
-                    <button mat-raised-button color="accent" class="m-2" (click)="onReply(i)">Reply</button>
+                    <div class="d-flex justify-content-center">
+                      <button mat-raised-button color="primary" class="m-2" (click)="onHistory(i)">History</button>
+                      <button mat-raised-button color="accent" class="m-2" (click)="onReply(i)">Reply</button>
+                    </div>
                   </mat-card-content>
                 </mat-card>
               </mat-card-content>
@@ -50,23 +49,26 @@
         <div *ngIf="booleanHistory">
           <mat-card class="m-2">
             <mat-card-header>
-              <mat-icon class="m-2">alternate_email</mat-icon>
-              <h1 class="m-1">{{current_Message.owner}}</h1>
+              <div>
+                <h3>From: {{current_Message.owner_From_Name}}</h3>
+                <h5>Email: {{current_Message.email_From}}</h5>
+                <mat-divider></mat-divider>
+                <h3>To: {{current_Message.owner_To_Name}}</h3>
+                <h5>Email: {{current_Message.email_To}}</h5>
+              </div>
+              <mat-divider></mat-divider>
             </mat-card-header>
             <mat-card-content>
               <mat-card>
-                <mat-card-header>
-                  <div>
-                    <h4>From: {{current_Message.email_From}}</h4>
-                    <h4>To: {{current_Message.email_To}}</h4>
-                  </div>
-                </mat-card-header>
               <mat-card-content>
                 <h4>Message: {{current_Message.current_Message}}</h4>
-                <button mat-raised-button color="warn" class="m-2" (click)="onReturn()">Return</button>
+                <div class="d-flex justify-content-end">
+                  <button mat-raised-button color="warn" class="m-2" (click)="onReturn()">Return</button>
+                </div>
+
                 <div *ngFor="let data of current_Message.historyEntities">
                   <mat-card class="m-2">
-                    <h4 class="m-2">Who sent: {{data.sender}}</h4>
+                    <h4 class="m-2">Email: {{data.sender}}</h4>
                     <h4 class="m-2">Message: {{data.message}}</h4>
                   </mat-card>
                 </div>
@@ -79,15 +81,18 @@
         <div *ngIf="booleanReply">
           <mat-card class="m-2">
             <mat-card-header>
-              <mat-icon class="m-2">alternate_email</mat-icon>
-              <h1 class="m-1">{{current_Message.owner}}</h1>
+              <div>
+                <h3>From: {{current_Message.owner_From_Name}}</h3>
+                <h5>Email: {{current_Message.email_From}}</h5>
+                <mat-divider></mat-divider>
+                <h3>To: {{current_Message.owner_To_Name}}</h3>
+                <h5>Email: {{current_Message.email_To}}</h5>
+              </div>
             </mat-card-header>
             <mat-card-content>
               <mat-card>
                 <mat-card-header>
                   <div>
-                    <h4>From: {{current_Message.email_From}}</h4>
-                    <h4>To: {{current_Message.email_To}}</h4>
                     <h4>Current Message: {{current_Message.current_Message}}</h4>
                     <h4>{{error}}</h4>
                     <mat-form-field style="width: 20rem">

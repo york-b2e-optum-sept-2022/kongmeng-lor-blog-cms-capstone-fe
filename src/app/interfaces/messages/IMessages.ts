@@ -5,5 +5,7 @@ export interface IMessages {
   owner: string,
   email_From: string,
   email_To: string,
+  owner_To_Name: string,
+  owner_From_Name: string,
   historyEntities:IHIstoryMessages[]
 }

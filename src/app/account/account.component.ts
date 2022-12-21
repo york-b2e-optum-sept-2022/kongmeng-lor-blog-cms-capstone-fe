@@ -60,6 +60,7 @@ export class AccountComponent implements OnDestroy{
   }
   onCancel() {
     this.clearVariables();
+    this.accountService.$error.next("");
     this.signUp = false;
   }
   clearVariables() {

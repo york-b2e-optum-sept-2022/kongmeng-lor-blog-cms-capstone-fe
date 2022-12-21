@@ -1,5 +1,5 @@
 <div *ngIf="!boolean_Send && !boolean_Blogs">
-  <mat-form-field appearance="fill" style="width: 37rem">
+  <mat-form-field appearance="fill" style="width: 40rem" class="m-3">
     <mat-label>search users</mat-label>
     <input matInput [ngModel]="search" (ngModelChange)="onFilterSearchAccounts($event)">
   </mat-form-field>
@@ -7,13 +7,13 @@
 
 <div *ngIf="!boolean_Send && !boolean_Blogs">
   <div *ngFor="let element of displayAccounts; let i = index" >
-    <mat-card class="m-3">
-        <div class="d-flex m-2">
+    <mat-card class="m-3" style="border-radius: 100px">
+        <div class="d-flex m-2 justify-content-center">
           <mat-icon class="m-2">account_circle</mat-icon>
           <h2 class="m-1"> {{element.name}}</h2>
         </div>
       <mat-card-content>
-        <div>
+        <div class="d-flex justify-content-center">
           <button mat-raised-button color="primary" class="m-2" (click)="onSend(i)" *ngIf="!boolean_Send">Send a message</button>
           <button mat-raised-button color="accent" class="m-2" (click)="onViewBlogs(i)">View all the blogs</button>
         </div>
@@ -28,7 +28,7 @@
       <div class="m-2 d-flex justify-content-between" >
         <div>
           <h3 class="m-1">Name: {{otherUser.name}}</h3>
-          <h3 class="m-1">Email: {{otherUser.email}}</h3>
+          <h5 class="m-1">Email: {{otherUser.email}}</h5>
         </div>
         <div class="m-4" *ngIf="!boolean_ViewMore">
           <button mat-raised-button color="warn" (click)="onCancel()">Return</button>
@@ -38,7 +38,14 @@
         </div>
       </div>
       <mat-card-content>
+        <div *ngIf="otherUser.blogEntities.length === 0" class="d-flex justify-content-center">
 
+          <mat-card>
+            <h1 class="m-2 d-flex justify-content-center">Notice!</h1>
+            <h4 class="m-4">This account currently do not have any blogs. Check back again other times!</h4>
+          </mat-card>
+
+        </div>
         <div *ngIf="!boolean_ViewMore">
           <div *ngFor="let element of otherUser.blogEntities; let i = index">
             <mat-card class="m-2">

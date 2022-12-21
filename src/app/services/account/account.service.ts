@@ -38,6 +38,8 @@ export class AccountService {
     owner: "",
     email_From: "",
     email_To: "",
+    owner_From_Name: "",
+    owner_To_Name: ""
   }
 
   public createAccount(data: ICreateAccount) {
@@ -95,6 +97,7 @@ export class AccountService {
     this.httpService.deleteComment(data).pipe(first()).subscribe({
       next: value => {
         this.$current_Blog.next(value)
+        this.blogService.getAllBlogs();
       }, error: err => {console.log(err)}
     });
   }
@@ -108,7 +111,10 @@ export class AccountService {
   }
   public editComment(data: IEditComment) {
     this.httpService.editComment(data).pipe(first()).subscribe({
-      next: value => {this.$current_Blog.next(value)}, error: err => {console.log(err)}
+      next: value => {
+        this.$current_Blog.next(value)
+        this.blogService.getAllBlogs();
+      }, error: err => {console.log(err)}
     })
   }
 

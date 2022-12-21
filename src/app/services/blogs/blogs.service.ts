@@ -51,6 +51,7 @@ export class BlogsService {
     this.httpService.editBlog(data).pipe(first()).subscribe({
       next: value => {
         this.getBlogsById(id);
+        this.getAllBlogs();
       }, error: err => {console.log(err)}});
   }
 

@@ -1,11 +1,17 @@
 <div>
-  <mat-form-field appearance="fill" class="m-2" style="width: 40rem;" *ngIf="booleanViewAll">
-    <mat-label >search blogs</mat-label>
-    <input matInput [ngModel]="searchAllBlogs" (ngModelChange)="filterAllBlogs($event)">
-  </mat-form-field>
-      <button mat-raised-button class="m-2" color="primary" (click)="viewAll()" *ngIf="!booleanViewAll" c="">View All Blogs</button>
-      <button mat-raised-button class="m-2" color="accent" (click)="viewMyBlogs()" *ngIf="!booleanViewMine">View My Blogs</button>
-      <button mat-raised-button class="m-2" color="warn" (click)="createBlogs()" *ngIf="!booleanCreateBlogs">Create Blogs</button>
+  <div class="d-flex justify-content-center">
+    <button mat-raised-button class="m-1" color="primary" (click)="viewAll()" *ngIf="!booleanViewAll" c="">View All Blogs</button>
+    <button mat-raised-button class="m-1" color="accent" (click)="viewMyBlogs()" *ngIf="!booleanViewMine">View My Blogs</button>
+    <button mat-raised-button class="m-1" color="warn" (click)="createBlogs()" *ngIf="!booleanCreateBlogs">Create Blogs</button>
+  </div>
+  <div>
+    <mat-form-field appearance="fill" class="m-4" style="width: 45rem;" *ngIf="booleanViewAll">
+      <mat-label>search blogs</mat-label>
+      <input matInput [ngModel]="searchAllBlogs" (ngModelChange)="filterAllBlogs($event)">
+    </mat-form-field>
+  </div>
+
+
 </div>
 
 <div *ngIf="!booleanViewAll && !booleanCreateBlogs ">
@@ -76,7 +82,7 @@
           </mat-form-field>
         </div>
         <div>
-          <h4 class="m-1">Owner: {{blog.owner_Id}}</h4>
+          <h4 class="m-1">Owner: {{blog.owner_Email}}</h4>
           <div class="d-flex">
             <h5 class="m-1">Create Date: {{blog.create_Date}}</h5>
             <h5 class="m-1">Update Date: {{blog.update_Date}}</h5>

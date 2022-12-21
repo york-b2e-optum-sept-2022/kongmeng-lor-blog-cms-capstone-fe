@@ -21,10 +21,19 @@ export class MessageComponent implements OnDestroy{
         }
       }
     });
+
     this.sub2 = this.accountService.$currentId.subscribe({
       next: value => {this.currentId = value}
     });
-    this.sub3 = this.accountService.$error.subscribe({
+    this.sub3 = this.accountService.$current_Account.subscribe({
+      next: value => {
+        if(value!=null) {
+          this.current_Account = this.current_Account;
+          console.log(value)
+        }
+      }
+    });
+    this.sub5 = this.accountService.$error.subscribe({
       next: value => {this.error = value}
     });
     this.sub4 = this.accountService.$messages.subscribe({
@@ -34,13 +43,7 @@ export class MessageComponent implements OnDestroy{
         }
       }
     });
-    this.sub5 = this.accountService.$current_Account.subscribe({
-      next: value => {
-        if(value!=null) {
-          this.current_Account = this.current_Account;
-        }
-      }
-    })
+
   }
   sub1: Subscription;
   sub2: Subscription;
@@ -66,7 +69,9 @@ export class MessageComponent implements OnDestroy{
     owner: "",
     historyEntities: [],
     email_To: "",
-    email_From: ""
+    email_From: "",
+    owner_From_Name: "",
+    owner_To_Name: ""
 }
 
   onHistory(i: number) {

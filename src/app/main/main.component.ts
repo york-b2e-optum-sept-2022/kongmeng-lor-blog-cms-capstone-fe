@@ -77,6 +77,8 @@ export class MainComponent implements OnDestroy{
     id: -1,
     email_From: "",
     current_Message: "",
+    owner_From_Name: "",
+    owner_To_Name: "",
     historyEntities: []
   }
   boolean_History: boolean = false;
